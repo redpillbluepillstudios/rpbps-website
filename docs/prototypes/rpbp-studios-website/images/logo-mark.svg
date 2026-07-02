@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 192" fill="none" role="img" aria-label="Red Pill Blue Pill Studios" shape-rendering="crispEdges">
+  <!-- Red half -->
+  <g fill="#d23a33">
+    <rect x="72" y="0"   width="96"  height="24"/>
+    <rect x="24" y="24"  width="144" height="24"/>
+    <rect x="0"  y="48"  width="168" height="24"/>
+    <rect x="0"  y="72"  width="168" height="24"/>
+    <rect x="0"  y="96"  width="168" height="24"/>
+    <rect x="0"  y="120" width="168" height="24"/>
+    <rect x="24" y="144" width="144" height="24"/>
+    <rect x="72" y="168" width="96"  height="24"/>
+  </g>
+  <!-- Blue half -->
+  <g fill="#2f5ed8">
+    <rect x="168" y="0"   width="120" height="24"/>
+    <rect x="168" y="24"  width="168" height="24"/>
+    <rect x="168" y="48"  width="192" height="24"/>
+    <rect x="168" y="72"  width="192" height="24"/>
+    <rect x="168" y="96"  width="192" height="24"/>
+    <rect x="168" y="120" width="192" height="24"/>
+    <rect x="168" y="144" width="168" height="24"/>
+    <rect x="168" y="168" width="120" height="24"/>
+  </g>
+</svg>

@@ -1,0 +1,237 @@
+/* Red Pill Blue Pill Studios — home page
+   Dark game-portal theme (inspired by ninjakiwi.com): charcoal-gray textured body,
+   near-black chrome, red + blue brand accents. Flat, no color gradients (the only
+   gradients are the faint background grid texture). All color lives in :root. */
+
+:root {
+  /* Brand accents — red + blue, from the studio name */
+  --red:  #ed1c24;   /* primary accent (buttons, section icon, Sagitta) */
+  --blue: #3b82f6;   /* secondary accent (Galactic) */
+
+  /* Surfaces */
+  --bg:      #28282c;   /* body — "that gray" */
+  --grid:    #2d2d31;   /* faint grid line over the body */
+  --nav:     #1b1c1f;   /* nav + footer (near-black chrome) */
+  --hero:    #1e1f23;   /* hero banner (a touch lighter than the chrome) */
+  --surface: #303036;   /* game art frames, store badges, form fields */
+
+  /* Text */
+  --head:  #ffffff;   /* headings / white text */
+  --text:  #b6bac2;   /* body copy */
+  --faint: #8b8f99;   /* small labels / eyebrows */
+
+  /* Lines */
+  --line:      rgba(255, 255, 255, .09);
+  --line-dark: rgba(255, 255, 255, .12);
+
+  /* Fonts — retro pixel display + clean readable body */
+  --font-display: 'Pixelify Sans', ui-monospace, monospace;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Aliases kept so older inline styles keep resolving */
+  --ink:   #1b1c1f;   /* dark chrome */
+  --ink-2: #ffffff;   /* headings on dark */
+  --muted: #b6bac2;   /* body copy */
+  --card:  #303036;   /* form fields */
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* Body = the charcoal gray with a faint 22px grid texture. */
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@keyframes rpbpRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+.rp-link { transition: color .2s, opacity .2s; }
+.rp-link:hover { color: var(--head); }
+
+.rp-btn { transition: transform .2s, box-shadow .3s, opacity .2s, background-color .2s; }
+.rp-btn:hover { transform: translateY(-2px); }
+
+.rp-reveal { opacity: 0; }
+.rp-reveal.in { animation: rpbpRise .7s cubic-bezier(.2, .7, .2, 1) forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rp-reveal { opacity: 1; }
+  .rp-reveal.in { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- Nav (overlays the hero, turns solid on scroll) ---------- */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 40px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0));
+  transition: background .25s ease, box-shadow .25s ease;
+}
+.site-nav.is-solid {
+  background: var(--ink);
+  box-shadow: 0 4px 22px rgba(0, 0, 0, .5);
+  border-bottom: 1px solid var(--line-dark);
+}
+.site-nav .rp-link { color: #e8eaee; text-shadow: 0 1px 6px rgba(0, 0, 0, .6); }
+.site-nav.is-solid .rp-link { color: #9aa0ad; text-shadow: none; }
+.site-nav .rp-link:hover { color: #fff; }
+/* keep the anchored games section clear of the fixed nav */
+#games { scroll-margin-top: 76px; }
+
+/* ---------- Hero carousel (featured games) ---------- */
+.hero-track { display: flex; transition: transform .55s cubic-bezier(.4, 0, .2, 1); }
+.hero-slide { flex: 0 0 100%; position: relative; overflow: hidden; }
+
+/* Nav arrows — big thin edge chevrons */
+.hero-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+  border: none; background: none; padding: 6px 14px;
+  color: rgba(255, 255, 255, .8); font: 300 64px/1 var(--font-body); cursor: pointer;
+  /* tight dark halo = readable on light OR dark backdrops, no visible box */
+  text-shadow: 0 0 4px rgba(0, 0, 0, .85), 0 0 10px rgba(0, 0, 0, .6), 0 2px 8px rgba(0, 0, 0, .5);
+  transition: color .2s, transform .2s;
+}
+.hero-nav:hover { color: #fff; }
+.hero-prev { left: 6px; }
+.hero-next { right: 6px; }
+.hero-prev:hover { transform: translateY(-50%) translateX(-3px); }
+.hero-next:hover { transform: translateY(-50%) translateX(3px); }
+
+/* Dots */
+.hero-dots { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 5; display: flex; gap: 9px; }
+.hero-dot { width: 10px; height: 10px; padding: 0; border: none; border-radius: 5px; background: rgba(255, 255, 255, .45); cursor: pointer; box-shadow: 0 1px 4px rgba(0, 0, 0, .55); transition: width .3s, background .2s; }
+.hero-dot.active { width: 26px; background: #fff; }
+
+@media (max-width: 560px) { .hero-nav { display: none; } }
+
+/* Blurred, darkened game art as an ambient backdrop. Falls back to the solid
+   --hero color when the image is missing (blurring a solid does nothing). */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-color: var(--hero);
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  filter: blur(34px) saturate(1.15);
+  transform: scale(1.2);            /* overscan so the blur can't reveal edges */
+}
+.hero-scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background: rgba(20, 21, 25, .82);   /* dark scrim keeps the title readable */
+}
+.hero-grid { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; padding: 84px 40px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+.hero-art { justify-self: center; width: 100%; max-width: 320px; }
+
+@media (max-width: 820px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; padding: 56px 24px; text-align: center; }
+  .hero-copy p { margin-left: auto; margin-right: auto; }
+  .hero-cta { justify-content: center; }
+  .hero-art { max-width: 240px; }
+}
+
+/* ---------- Games band ("Our Games") ---------- */
+.games { position: relative; width: 100%; background: transparent; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.games__list { max-width: 1180px; margin: 0 auto; padding: 6px 40px 34px; }
+
+/* Section header: red icon + white title. Shared by Our Games, Studio, Contact. */
+.sec-head { display: flex; align-items: center; gap: 12px; }
+.sec-head--right { justify-content: flex-end; }
+.sec-head--center { justify-content: center; }
+.sec-head__icon { display: inline-flex; color: var(--red); }
+.sec-head__icon svg { width: 30px; height: 30px; display: block; }
+.sec-head__title { margin: 0; font: 600 26px/1.1 var(--font-display); letter-spacing: .01em; color: var(--head); }
+
+.games__divider { height: 1px; border: none; margin: 0; background: var(--line); }
+
+/* One game row */
+.game__inner { display: grid; grid-template-columns: 300px 1fr; gap: 60px; align-items: center; padding: 54px 0; }
+
+/* Box art. Solid dark placeholder (accent initial, set per game inline) until real
+   art is added; the <img> covers it once it loads, removing itself if the file is missing. */
+.game__art {
+  position: relative; width: 100%; aspect-ratio: 1 / 1;
+  border-radius: 18px; overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, .8), inset 0 0 0 1px var(--line);
+  display: flex; align-items: center; justify-content: center;
+}
+.game__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.game__art-fallback { font: 800 88px/1 var(--font-body); color: var(--head); }
+
+.game__title { margin: 0; font: 700 38px/1.12 var(--font-display); letter-spacing: 0; color: var(--head); }
+.game__tag { margin-top: 10px; font: 700 12px/1 var(--font-display); letter-spacing: .12em; text-transform: uppercase; }
+.game__desc { margin: 18px 0 0; font: 400 17px/1.6 var(--font-body); color: var(--text); max-width: 580px; text-wrap: pretty; }
+.game__desc b { color: var(--head); font-weight: 700; }
+.game__rule { height: 3px; width: 100%; max-width: 580px; margin: 26px 0; border: none; border-radius: 3px; }
+.game__available { font: 700 13px/1 var(--font-body); letter-spacing: .02em; color: var(--head); margin-bottom: 16px; }
+.game__stores { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Store badge — dark surface pill. */
+.store-badge {
+  display: inline-flex; align-items: center; gap: 11px;
+  padding: 10px 18px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--line);
+  text-decoration: none;
+  transition: transform .2s, border-color .2s, box-shadow .3s;
+}
+.store-badge:hover { transform: translateY(-2px); border-color: rgba(255, 255, 255, .28); box-shadow: 0 14px 30px -16px rgba(0, 0, 0, .9); }
+.store-badge__logo { font-size: 26px; line-height: 1; color: #fff; }
+.store-badge__text { display: flex; flex-direction: column; text-align: left; }
+.store-badge__text small { font: 500 10px/1.3 var(--font-body); color: #b6bac2; letter-spacing: .02em; }
+.store-badge__text b { font: 600 17px/1.1 var(--font-body); color: #fff; }
+
+@media (max-width: 760px) {
+  .games__list { padding: 6px 24px 24px; }
+  .game__inner { grid-template-columns: 1fr; gap: 32px; padding: 44px 0; }
+  .game__art { max-width: 260px; margin: 0 auto; }
+  .game__title { font-size: 34px; }
+}
+
+/* ---------- Full-bleed content sections (studio, contact) ---------- */
+.wide-section { position: relative; width: 100%; background: transparent; border-top: 1px solid var(--line); }
+.wide-inner { max-width: 1180px; margin: 0 auto; padding: 56px 40px; }
+.eyebrow { font: 700 12px/1 var(--font-display); letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+
+/* Rounded surface card — lifts Studio/Contact off the textured body so they stand out. */
+.panel {
+  max-width: 720px; margin: 0 auto;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+  padding: 34px 40px;
+  box-shadow: 0 40px 80px -55px rgba(0, 0, 0, .95);
+}
+.panel .rp-form { max-width: none; margin: 0; }        /* fill the panel */
+.panel .sec-head { margin-bottom: 16px; }
+@media (max-width: 600px) { .panel { padding: 32px 24px; border-radius: 18px; } }
+
+/* ---------- Form fields (dark) ---------- */
+.rp-form { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+.rp-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.rp-label { display: block; font: 700 12px/1 var(--font-body); letter-spacing: .02em; color: var(--faint); margin-bottom: 8px; }
+.rp-field {
+  width: 100%; padding: 12px 15px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--line);
+  color: var(--head); font: 400 15px/1.4 var(--font-body); outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.rp-field:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(237, 28, 36, .25); }
+.rp-field::placeholder { color: #7c8089; }
+textarea.rp-field { min-height: 104px; resize: vertical; line-height: 1.55; }
+.rp-status { text-align: center; font: 600 14px/1.4 var(--font-body); color: #4ec97a; min-height: 20px; }
+
+@media (max-width: 600px) { .rp-form-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Footer (3-column: description · logo · links) ---------- */
+.footer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 40px; }
+.footer-desc { max-width: 300px; }
+.footer-links { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+@media (max-width: 720px) {
+  .footer-row { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 26px; }
+  .footer-desc { max-width: 420px; }
+  .footer-links { align-items: center; }
+}

@@ -1,0 +1,12 @@
+{
+  "cody-product-builder": {
+    "name": "Red Pill Blue Pill Studios Website",
+    "description": "Production Astro website for Red Pill Blue Pill Studios (indie game studio) — data-driven games showcase, studio + per-game privacy pages, deployed to GitHub Pages at redpillbluepillstudios.com.",
+    "version": "0.0.0",
+    "phase": "plan",
+    "projectPath": "docs",
+    "releaseNotesPath": "{{projectRoot}}",
+    "createdAt": "2026-07-02",
+    "updatedAt": "2026-07-02"
+  }
+}

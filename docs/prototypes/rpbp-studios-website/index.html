@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Red Pill Blue Pill Studios — Indie Apps for the Apple Ecosystem</title>
+  <meta name="description" content="A small, independent studio crafting calm, focused apps for iPhone and the wider Apple ecosystem. No ads, no accounts, no tracking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div style="font-family:var(--font-body); background:transparent; color:var(--text); min-height:100vh; -webkit-font-smoothing:antialiased;">
+
+  <!-- ============ NAV (dark) ============ -->
+  <nav class="site-nav" id="site-nav">
+    <a href="index.html" style="display:flex; align-items:center; text-decoration:none;">
+      <img src="images/logo-horizontal.svg" alt="Red Pill Blue Pill Studios" style="height:34px; width:auto; display:block; filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));">
+    </a>
+    <div style="display:flex; align-items:center; gap:32px; font:600 16px/1 var(--font-body);">
+      <a href="#games" class="rp-link" style="text-decoration:none;">Games</a>
+      <a href="mailto:marcelo@redpillbluepillstudios.com" class="rp-link" style="text-decoration:none;">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO — featured-game carousel ============ -->
+  <!-- Each .hero-slide is one game. To add/reorder, copy a slide and swap the art
+       url, accent color (eyebrow + CTA + art initial), name, and copy. -->
+  <header class="hero" style="position:relative; overflow:hidden; background:var(--hero); border-bottom:1px solid var(--line);">
+    <div class="hero-track" id="hero-track">
+
+      <!-- Slide: Sagitta Chains (red) -->
+      <div class="hero-slide">
+        <div class="hero-bg" style="background-image:url('images/games/sagitta-chains.png');"></div>
+        <div class="hero-scrim"></div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow" style="color:var(--red); margin-bottom:18px;">Featured game</div>
+            <h1 style="margin:0; font:700 50px/1.12 var(--font-display); letter-spacing:0; color:var(--head);">Sagitta Chains</h1>
+            <p style="margin:20px 0 0; font:400 19px/1.55 var(--font-body); color:var(--text); max-width:460px; text-wrap:pretty;">Calm chain-reaction puzzles. Match arrows by color and direction, fire them off the board, and chase your best score.</p>
+            <div class="hero-cta" style="margin-top:30px; display:flex; gap:14px; flex-wrap:wrap;">
+              <a href="https://apps.apple.com/us/app/sagitta-chains/id6776856846" target="_blank" rel="noopener" class="rp-btn" aria-label="Sagitta Chains on the App Store" style="display:inline-flex; align-items:center; gap:10px; padding:15px 28px; border-radius:10px; border:2px solid var(--red); background:var(--red); color:#fff; font:700 15px/1 var(--font-body); text-decoration:none;"><svg viewBox="0 0 24 24" fill="currentColor" width="17" height="20" aria-hidden="true" style="display:block;"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>            </div>
+          </div>
+          <div class="hero-art">
+            <div class="game__art">
+              <span class="game__art-fallback" style="color:var(--red);">S</span>
+              <img src="images/games/sagitta-chains.png" alt="Sagitta Chains cover art" onerror="this.remove()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide: Galactic Invaders (blue) -->
+      <div class="hero-slide">
+        <div class="hero-bg" style="background-image:url('images/games/galactic-invaders.png');"></div>
+        <div class="hero-scrim"></div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow" style="color:var(--red); margin-bottom:18px;">Featured game</div>
+            <h1 style="margin:0; font:700 50px/1.12 var(--font-display); letter-spacing:0; color:var(--head);">Galactic Invaders</h1>
+            <p style="margin:20px 0 0; font:400 19px/1.55 var(--font-body); color:var(--text); max-width:460px; text-wrap:pretty;">A fast, arcade-style space shooter. Blast through waves of alien invaders, dodge incoming fire, and push for the high score.</p>
+            <div class="hero-cta" style="margin-top:30px; display:flex; gap:14px; flex-wrap:wrap;">
+              <a href="https://galacticinvaders.ibuildwith.ai/" target="_blank" rel="noopener" class="rp-btn" aria-label="Play Galactic Invaders on the web" style="display:inline-flex; align-items:center; gap:10px; padding:15px 28px; border-radius:10px; border:2px solid var(--red); background:var(--red); color:#fff; font:700 15px/1 var(--font-body); text-decoration:none;"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true" style="display:block;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>On the Web</a>            </div>
+          </div>
+          <div class="hero-art">
+            <div class="game__art">
+              <span class="game__art-fallback" style="color:var(--red);">G</span>
+              <img src="images/games/galactic-invaders.png" alt="Galactic Invaders cover art" onerror="this.remove()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Carousel controls -->
+    <button class="hero-nav hero-prev" type="button" aria-label="Previous game">&#8249;</button>
+    <button class="hero-nav hero-next" type="button" aria-label="Next game">&#8250;</button>
+    <div class="hero-dots" id="hero-dots"></div>
+  </header>
+
+  <!-- ============ GAMES ============ -->
+  <!-- One enclosed band; the two games read as a single "Games" unit. One shared
+       background field spans both, with per-game accent (tag color + rule) for identity.
+       To add a game: copy a <article class="game__inner">…</article> row (plus a
+       <hr class="games__divider">) and swap the art path, name, accent color, and copy. -->
+  <section id="games" class="games">
+    <div class="games__list">
+
+      <!-- Section header: gamepad icon + title -->
+      <div class="sec-head rp-reveal" style="padding:34px 0 4px;">
+        <span class="sec-head__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM11 13H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4-3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+        </span>
+        <h2 class="sec-head__title">The Games</h2>
+      </div>
+
+      <!-- ---- Sagitta Chains (red accent) ---- -->
+      <article class="game__inner rp-reveal">
+        <div class="game__art">
+          <span class="game__art-fallback" style="color:var(--red);">S</span>
+          <img src="images/games/sagitta-chains.png" alt="Sagitta Chains cover art" loading="lazy" onerror="this.remove()">
+        </div>
+        <div>
+          <h2 class="game__title">Sagitta Chains</h2>
+          <div class="game__tag" style="color:var(--red);">Game · Board</div>
+          <p class="game__desc"><b>Sagitta Chains</b> is a calm chain-reaction puzzler. Match arrows by color and direction, fire them off the board, and chase your best score.</p>
+          <hr class="game__rule" style="background:var(--red);">
+          <div class="game__available">Available on</div>
+          <div class="game__stores">
+            <a class="rp-btn" href="https://apps.apple.com/us/app/sagitta-chains/id6776856846" target="_blank" rel="noopener" aria-label="Sagitta Chains on the App Store" style="display:inline-flex; align-items:center; gap:9px; padding:13px 24px; border-radius:10px; border:2px solid var(--red); background:var(--red); color:#fff; font:700 15px/1 var(--font-body); text-decoration:none;">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="19" aria-hidden="true" style="display:block;"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              App Store
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <hr class="games__divider">
+
+      <!-- ---- Galactic Invaders (blue accent) ---- -->
+      <article class="game__inner rp-reveal">
+        <div class="game__art">
+          <span class="game__art-fallback" style="color:var(--red);">G</span>
+          <img src="images/games/galactic-invaders.png" alt="Galactic Invaders cover art" loading="lazy" onerror="this.remove()">
+        </div>
+        <div>
+          <h2 class="game__title">Galactic Invaders</h2>
+          <div class="game__tag" style="color:var(--red);">Game · Arcade</div>
+          <!-- TODO: replace with the real Galactic Invaders description -->
+          <p class="game__desc"><b>Galactic Invaders</b> is a fast, arcade-style space shooter. Blast through waves of alien invaders, dodge incoming fire, and push for the high score.</p>
+          <hr class="game__rule" style="background:var(--red);">
+          <div class="game__available">Available on</div>
+          <div class="game__stores">
+            <a class="rp-btn" href="https://galacticinvaders.ibuildwith.ai/" target="_blank" rel="noopener" aria-label="Play Galactic Invaders on the web" style="display:inline-flex; align-items:center; gap:9px; padding:13px 24px; border-radius:10px; border:2px solid var(--red); background:var(--red); color:#fff; font:700 15px/1 var(--font-body); text-decoration:none;">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true" style="display:block;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              The Web
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:var(--red); padding:56px 40px;">
+    <div style="max-width:1080px; margin:0 auto;">
+      <!-- Row: description (left) · logo (center) · links (right) -->
+      <div class="footer-row">
+        <p class="footer-desc" style="margin:0; font:400 15px/1.6 var(--font-body); color:rgba(255,255,255,.9); text-wrap:pretty;">A one man indie game studio focused on creating easy to play fun games.</p>
+        <img src="images/logo-footer.svg" alt="Red Pill Blue Pill Studios" style="height:104px; width:auto; display:block;">
+        <div class="footer-links">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <a href="#games" class="rp-link footer-link" style="color:rgba(255,255,255,.9); text-decoration:none; font:600 15px/1 var(--font-body);">Games</a>
+            <span style="color:rgba(255,255,255,.5);" aria-hidden="true">·</span>
+            <a href="mailto:marcelo@redpillbluepillstudios.com" class="rp-link footer-link" style="color:rgba(255,255,255,.9); text-decoration:none; font:600 15px/1 var(--font-body);">Contact</a>
+          </div>
+          <a href="privacy-policies/privacy-policy-sagitta-chains.html" class="rp-link footer-link" style="color:rgba(255,255,255,.9); text-decoration:none; font:600 15px/1 var(--font-body);">Privacy Policy</a>
+        </div>
+      </div>
+      <!-- Copyright, centered below (no divider line) -->
+      <div style="margin-top:34px; text-align:center; font:500 13px/1 var(--font-body); color:rgba(255,255,255,.72);">© 2026 Red Pill, Blue Pill Studios, LLC</div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+---
+import PlatformButton from './PlatformButton.astro';
+import type { PlatformKey } from '../lib/platforms';
+
+interface Props {
+  availableOn: { platform: PlatformKey; url: string }[];
+  gameTitle: string;
+}
+
+const { availableOn, gameTitle } = Astro.props;
+---
+
+<div class="platform-buttons">
+  {availableOn.map((entry) => (
+    <PlatformButton platform={entry.platform} url={entry.url} gameTitle={gameTitle} />
+  ))}
+</div>
+
+<style>
+  .platform-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>

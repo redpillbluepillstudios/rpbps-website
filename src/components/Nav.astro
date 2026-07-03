@@ -1,0 +1,78 @@
+---
+import logoHorizontal from '../assets/images/brand/logo-horizontal.svg';
+
+interface Props {
+  /**
+   * When true, the nav starts transparent and overlays the hero, turning solid on
+   * scroll (home page). When false, it renders solid from the top (pages without a
+   * hero, e.g. privacy) and does not toggle.
+   */
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+---
+
+<nav class:list={['site-nav', { 'is-solid': !overlay }]} id="site-nav" data-overlay={overlay ? 'true' : undefined}>
+  <a href="/" class="site-nav__brand" aria-label="Red Pill Blue Pill Studios — home">
+    <img src={logoHorizontal.src} alt="Red Pill Blue Pill Studios" width="220" height="34" />
+  </a>
+  <div class="site-nav__links">
+    <a href="/#games" class="rp-link">Games</a>
+    <a href="mailto:marcelo@redpillbluepillstudios.com" class="rp-link">Contact</a>
+  </div>
+</nav>
+
+<style>
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 40px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0));
+    transition: background .25s ease, box-shadow .25s ease;
+  }
+  .site-nav.is-solid {
+    background: var(--ink);
+    box-shadow: 0 4px 22px rgba(0, 0, 0, .5);
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  .site-nav__brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .site-nav__brand img {
+    height: 34px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .6));
+  }
+
+  .site-nav__links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font: 600 16px/1 var(--font-body);
+  }
+  .site-nav .rp-link {
+    color: #e8eaee;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, .6);
+  }
+  .site-nav.is-solid .rp-link {
+    color: #9aa0ad;
+    text-shadow: none;
+  }
+  .site-nav .rp-link:hover { color: #fff; }
+
+  @media (max-width: 560px) {
+    .site-nav { padding: 14px 22px; }
+    .site-nav__links { gap: 20px; font-size: 15px; }
+  }
+</style>

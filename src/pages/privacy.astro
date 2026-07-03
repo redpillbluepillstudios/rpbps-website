@@ -1,0 +1,12 @@
+---
+import { getEntry, render } from 'astro:content';
+import PrivacyLayout from '../layouts/PrivacyLayout.astro';
+
+const entry = await getEntry('pages', 'privacy');
+if (!entry) throw new Error('Missing studio privacy policy at src/content/pages/privacy.md');
+const { Content } = await render(entry);
+---
+
+<PrivacyLayout title={entry.data.title} updated={entry.data.updated} route="/privacy">
+  <Content />
+</PrivacyLayout>

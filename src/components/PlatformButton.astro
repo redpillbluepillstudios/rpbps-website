@@ -1,0 +1,47 @@
+---
+import { PLATFORMS, type PlatformKey } from '../lib/platforms';
+
+interface Props {
+  platform: PlatformKey;
+  url: string;
+  /** Game title, used to build an accessible label like "Sagitta Chains on the App Store". */
+  gameTitle: string;
+}
+
+const { platform, url, gameTitle } = Astro.props;
+const meta = PLATFORMS[platform];
+---
+
+<a
+  class="rp-btn platform-btn"
+  href={url}
+  target="_blank"
+  rel="noopener"
+  aria-label={`${gameTitle} ${meta.ariaSuffix}`}
+>
+  <svg class="platform-btn__icon" viewBox={meta.viewBox} fill="currentColor" aria-hidden="true">
+    <path d={meta.path} />
+  </svg>
+  <span>{meta.label}</span>
+</a>
+
+<style>
+  .platform-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 13px 24px;
+    border-radius: 10px;
+    border: 2px solid var(--red);
+    background: var(--red);
+    color: #fff;
+    font: 700 15px/1 var(--font-body);
+    text-decoration: none;
+  }
+  .platform-btn__icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+    flex: 0 0 auto;
+  }
+</style>

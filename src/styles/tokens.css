@@ -1,0 +1,39 @@
+/* Red Pill Blue Pill Studios — design tokens.
+   Ported verbatim from the prototype :root so the production site matches exactly.
+   Dark game-portal theme (inspired by ninjakiwi.com): charcoal-gray textured body,
+   near-black chrome, red + blue brand accents. Flat, no color gradients (the only
+   gradients are the faint background grid texture). All color lives here. */
+
+:root {
+  /* Brand accents — red + blue, from the studio name */
+  --red:  #ed1c24;   /* primary accent (buttons, section icon, Sagitta) */
+  --blue: #3b82f6;   /* secondary accent (Galactic) */
+
+  /* Surfaces */
+  --bg:      #28282c;   /* body — "that gray" */
+  --grid:    #2d2d31;   /* faint grid line over the body */
+  --nav:     #1b1c1f;   /* nav + footer (near-black chrome) */
+  --hero:    #1e1f23;   /* hero banner (a touch lighter than the chrome) */
+  --surface: #303036;   /* game art frames, store badges, form fields */
+
+  /* Text */
+  --head:  #ffffff;   /* headings / white text */
+  --text:  #b6bac2;   /* body copy */
+  --faint: #8b8f99;   /* small labels / eyebrows */
+
+  /* Lines */
+  --line:      rgba(255, 255, 255, .09);
+  --line-dark: rgba(255, 255, 255, .12);
+
+  /* Fonts — retro pixel display + clean readable body.
+     Self-hosted via Fontsource variable fonts ("Inter Variable",
+     "Pixelify Sans Variable"), with the prototype's fallback stacks. */
+  --font-display: 'Pixelify Sans Variable', 'Pixelify Sans', ui-monospace, monospace;
+  --font-body:    'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Aliases kept so any carried-over rules keep resolving */
+  --ink:   #1b1c1f;   /* dark chrome */
+  --ink-2: #ffffff;   /* headings on dark */
+  --muted: #b6bac2;   /* body copy */
+  --card:  #303036;   /* form fields */
+}

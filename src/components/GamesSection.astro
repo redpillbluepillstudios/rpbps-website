@@ -1,0 +1,51 @@
+---
+import { getOrderedGames } from '../lib/games';
+import GameCard from './GameCard.astro';
+
+const games = await getOrderedGames();
+---
+
+<section id="games" class="games">
+  <div class="games__list">
+    <div class="sec-head rp-reveal games__head">
+      <span class="sec-head__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM11 13H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4-3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+      </span>
+      <h2 class="sec-head__title">The Games</h2>
+    </div>
+
+    {games.map((game, idx) => (
+      <>
+        {idx > 0 && <hr class="games__divider" />}
+        <GameCard game={game} />
+      </>
+    ))}
+  </div>
+</section>
+
+<style>
+  .games {
+    position: relative;
+    width: 100%;
+    background: transparent;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 76px;
+  }
+  .games__list {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 6px 40px 34px;
+  }
+  .games__head { padding: 34px 0 4px; }
+  .games__divider {
+    height: 1px;
+    border: none;
+    margin: 0;
+    background: var(--line);
+  }
+
+  @media (max-width: 760px) {
+    .games__list { padding: 6px 24px 24px; }
+  }
+</style>

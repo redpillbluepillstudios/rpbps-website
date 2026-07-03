@@ -1,0 +1,53 @@
+---
+// Self-hosted fonts (Fontsource variable) + global styles — loaded once for every page.
+import '@fontsource-variable/inter/index.css';
+import '@fontsource-variable/pixelify-sans/index.css';
+import '../styles/global.css';
+
+import Seo from '../components/Seo.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import type { SeoOverrides } from '../lib/seo';
+
+interface Props extends SeoOverrides {
+  /** Route key for SEO lookup (e.g. "/", "/privacy"). Defaults to the current path. */
+  route?: string;
+  /** Open Graph type. */
+  type?: 'website' | 'article';
+  /**
+   * When true, the nav overlays a hero (transparent → solid on scroll). When false
+   * (default) the nav is solid and page content is padded to clear the fixed nav.
+   */
+  navOverlay?: boolean;
+}
+
+const { route = Astro.url.pathname, type = 'website', navOverlay = false, ...seoOverrides } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <Seo route={route} type={type} {...seoOverrides} />
+  </head>
+  <body>
+    <Nav overlay={navOverlay} />
+    <main class:list={[{ 'has-fixed-nav': !navOverlay }]}>
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import '../scripts/nav.ts';
+      import '../scripts/reveals.ts';
+    </script>
+
+    <style>
+      /* Pages without a hero: pad content so it clears the fixed nav. */
+      .has-fixed-nav { padding-top: 68px; }
+    </style>
+  </body>
+</html>

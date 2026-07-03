@@ -1,0 +1,195 @@
+---
+import { getImage } from 'astro:assets';
+import { getCarouselGames } from '../lib/carousel';
+import { getGameImage } from '../lib/gameImages';
+import GameArt from './GameArt.astro';
+import PlatformButtons from './PlatformButtons.astro';
+
+const games = await getCarouselGames();
+
+// Optimized, blurred-backdrop source per slide (the same art, used behind the copy).
+const slides = await Promise.all(
+  games.map(async (game) => {
+    const src = getGameImage(game.id, game.data.thumbnail);
+    const bg = await getImage({ src, width: 1000, height: 1000, format: 'webp' });
+    return { game, bgSrc: bg.src };
+  }),
+);
+
+const hasMultiple = slides.length > 1;
+---
+
+<header class="hero">
+  <div class="hero-track" id="hero-track">
+    {slides.map(({ game, bgSrc }) => (
+      <div class="hero-slide">
+        <div class="hero-bg" style={`background-image:url('${bgSrc}')`}></div>
+        <div class="hero-scrim"></div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow hero-eyebrow">Featured game</div>
+            <h1 class="hero-title">{game.data.title}</h1>
+            <p class="hero-blurb">{game.data.blurb}</p>
+            <div class="hero-cta">
+              <PlatformButtons availableOn={game.data.availableOn} gameTitle={game.data.title} />
+            </div>
+          </div>
+          <div class="hero-art">
+            <GameArt slug={game.id} title={game.data.title} thumbnail={game.data.thumbnail} size={640} loading="eager" />
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {hasMultiple && (
+    <>
+      <button class="hero-nav hero-prev" type="button" aria-label="Previous game">&#8249;</button>
+      <button class="hero-nav hero-next" type="button" aria-label="Next game">&#8250;</button>
+      <div class="hero-dots" id="hero-dots"></div>
+    </>
+  )}
+</header>
+
+{hasMultiple && <script>import '../scripts/carousel.ts';</script>}
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--hero);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-track {
+    display: flex;
+    transition: transform .55s cubic-bezier(.4, 0, .2, 1);
+  }
+  .hero-slide {
+    flex: 0 0 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Blurred, darkened game art as an ambient backdrop. */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-color: var(--hero);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(34px) saturate(1.15);
+    transform: scale(1.2);
+  }
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(20, 21, 25, .82);
+  }
+
+  .hero-grid {
+    position: relative;
+    z-index: 2;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 84px 40px;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    margin: 0;
+    font: 700 50px/1.12 var(--font-display);
+    letter-spacing: 0;
+    color: var(--head);
+  }
+  .hero-blurb {
+    margin: 20px 0 0;
+    font: 400 19px/1.55 var(--font-body);
+    color: var(--text);
+    max-width: 460px;
+    text-wrap: pretty;
+  }
+  .hero-cta {
+    margin-top: 30px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .hero-art {
+    justify-self: center;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  /* Nav arrows — big thin edge chevrons with a dark halo. */
+  .hero-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    border: none;
+    background: none;
+    padding: 6px 14px;
+    color: rgba(255, 255, 255, .8);
+    font: 300 64px/1 var(--font-body);
+    cursor: pointer;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .85), 0 0 10px rgba(0, 0, 0, .6), 0 2px 8px rgba(0, 0, 0, .5);
+    transition: color .2s, transform .2s;
+  }
+  .hero-nav:hover { color: #fff; }
+  .hero-prev { left: 6px; }
+  .hero-next { right: 6px; }
+  .hero-prev:hover { transform: translateY(-50%) translateX(-3px); }
+  .hero-next:hover { transform: translateY(-50%) translateX(3px); }
+
+  /* Dots are created by carousel.ts at runtime → target them globally. */
+  .hero-dots {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    gap: 9px;
+  }
+  .hero-dots :global(.hero-dot) {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, .45);
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .55);
+    transition: width .3s, background .2s;
+  }
+  .hero-dots :global(.hero-dot.active) {
+    width: 26px;
+    background: #fff;
+  }
+
+  @media (max-width: 820px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      padding: 56px 24px;
+      text-align: center;
+    }
+    .hero-blurb { margin-left: auto; margin-right: auto; }
+    .hero-cta { justify-content: center; }
+    .hero-art { max-width: 240px; }
+  }
+  @media (max-width: 560px) {
+    .hero-nav { display: none; }
+  }
+</style>

@@ -1,0 +1,19 @@
+{
+  "defaults": {
+    "siteName": "Red Pill Blue Pill Studios",
+    "title": "Red Pill Blue Pill Studios — Indie Games",
+    "description": "A one-person indie game studio focused on creating easy-to-play, fun games.",
+    "image": "/og/default.png",
+    "twitter": ""
+  },
+  "pages": {
+    "/": {
+      "title": "Red Pill Blue Pill Studios — Indie Games",
+      "description": "A one-person indie game studio focused on creating easy-to-play, fun games. Play Sagitta Chains and Galactic Invaders."
+    },
+    "/privacy": {
+      "title": "Privacy Policy — Red Pill Blue Pill Studios",
+      "description": "How Red Pill Blue Pill Studios handles your privacy across our website and games."
+    }
+  }
+}

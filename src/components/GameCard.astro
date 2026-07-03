@@ -1,0 +1,89 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import GameArt from './GameArt.astro';
+import PlatformButtons from './PlatformButtons.astro';
+
+interface Props {
+  game: CollectionEntry<'games'>;
+}
+
+const { game } = Astro.props;
+const { title, tag, thumbnail, availableOn } = game.data;
+const { Content } = await render(game);
+---
+
+<article class="game rp-reveal">
+  <div class="game__art-col">
+    <GameArt slug={game.id} title={title} thumbnail={thumbnail} size={600} />
+  </div>
+  <div class="game__body">
+    <h2 class="game__title">{title}</h2>
+    <div class="game__tag">{tag}</div>
+    <div class="game__desc"><Content /></div>
+    <hr class="game__rule" />
+    <div class="game__available">Available on</div>
+    <PlatformButtons availableOn={availableOn} gameTitle={title} />
+  </div>
+</article>
+
+<style>
+  .game {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 54px 0;
+  }
+
+  .game__title {
+    margin: 0;
+    font: 700 38px/1.12 var(--font-display);
+    letter-spacing: 0;
+    color: var(--head);
+  }
+  .game__tag {
+    margin-top: 10px;
+    font: 700 12px/1 var(--font-display);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+  .game__desc { margin: 18px 0 0; }
+  .game__desc :global(p) {
+    margin: 0;
+    font: 400 17px/1.6 var(--font-body);
+    color: var(--text);
+    max-width: 580px;
+    text-wrap: pretty;
+  }
+  .game__desc :global(strong),
+  .game__desc :global(b) {
+    color: var(--head);
+    font-weight: 700;
+  }
+  .game__rule {
+    height: 3px;
+    width: 100%;
+    max-width: 580px;
+    margin: 26px 0;
+    border: none;
+    border-radius: 3px;
+    background: var(--red);
+  }
+  .game__available {
+    font: 700 13px/1 var(--font-body);
+    letter-spacing: .02em;
+    color: var(--head);
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 760px) {
+    .game {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 44px 0;
+    }
+    .game__art-col { max-width: 260px; margin: 0 auto; }
+    .game__title { font-size: 34px; }
+  }
+</style>

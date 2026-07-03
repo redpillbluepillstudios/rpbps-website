@@ -1,0 +1,36 @@
+---
+import { resolveSeo, type SeoOverrides } from '../lib/seo';
+
+interface Props extends SeoOverrides {
+  /** Route key used to look up page-specific SEO in seo.json (e.g. "/", "/privacy"). */
+  route?: string;
+  /** Open Graph type. "website" for pages, "article" for policies/posts. */
+  type?: 'website' | 'article';
+}
+
+const { route, type = 'website', ...overrides } = Astro.props;
+const seo = resolveSeo(route, overrides);
+
+// Build absolute URLs from the configured `site`.
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = seo.image ? new URL(seo.image, Astro.site).href : undefined;
+---
+
+<title>{seo.title}</title>
+<meta name="description" content={seo.description} />
+<link rel="canonical" href={canonical} />
+
+{/* Open Graph */}
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={seo.siteName} />
+<meta property="og:title" content={seo.title} />
+<meta property="og:description" content={seo.description} />
+<meta property="og:url" content={canonical} />
+{ogImage && <meta property="og:image" content={ogImage} />}
+
+{/* Twitter */}
+<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={seo.title} />
+<meta name="twitter:description" content={seo.description} />
+{ogImage && <meta name="twitter:image" content={ogImage} />}
+{seo.twitter && <meta name="twitter:site" content={seo.twitter} />}

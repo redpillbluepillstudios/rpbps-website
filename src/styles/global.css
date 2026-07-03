@@ -1,0 +1,70 @@
+/* Global base styles + shared primitives.
+   Design tokens live in tokens.css; component layout lives in each .astro component's
+   scoped <style>. Only truly cross-component rules belong here. */
+
+@import './tokens.css';
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+/* Body = the charcoal gray with a faint 22px grid texture. */
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 22px 22px;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; }
+
+/* ---------- Shared primitives ---------- */
+
+@keyframes rpbpRise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.rp-link { transition: color .2s, opacity .2s; text-decoration: none; }
+.rp-link:hover { color: var(--head); }
+
+.rp-btn { transition: transform .2s, box-shadow .3s, opacity .2s, background-color .2s; }
+.rp-btn:hover { transform: translateY(-2px); }
+
+/* Reveal-on-scroll: hidden until JS adds .in (see reveals.ts). */
+.rp-reveal { opacity: 0; }
+.rp-reveal.in { animation: rpbpRise .7s cubic-bezier(.2, .7, .2, 1) forwards; }
+
+/* Small uppercase label used above section titles / hero eyebrow. */
+.eyebrow {
+  font: 700 12px/1 var(--font-display);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* Section header: red icon + white title. Shared across sections. */
+.sec-head { display: flex; align-items: center; gap: 12px; }
+.sec-head--center { justify-content: center; }
+.sec-head__icon { display: inline-flex; color: var(--red); }
+.sec-head__icon svg { width: 30px; height: 30px; display: block; }
+.sec-head__title {
+  margin: 0;
+  font: 600 26px/1.1 var(--font-display);
+  letter-spacing: .01em;
+  color: var(--head);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rp-reveal { opacity: 1; }
+  .rp-reveal.in { animation: none; }
+  html { scroll-behavior: auto; }
+}

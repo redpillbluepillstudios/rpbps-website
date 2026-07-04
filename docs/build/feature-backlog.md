@@ -17,7 +17,7 @@ This document lists features and enhancements derived from the plan. It is a liv
 | B2 | Individual game detail pages | Dedicated landing page per game (beyond the privacy child) with fuller content, screenshots, etc. Out of scope for v1 (games link out). | Agent |
 | B3 | Contact form | Optional replacement for the mailto link if a form is ever wanted. Dropped in v1 per prototype findings. | Agent |
 
-## Version 1.0.0 - 🔴 Not Started
+## Version 1.0.0 - 🟢 Completed
 The faithful Astro rebuild of the prototype: data-driven games showcase, carousel, studio + per-game privacy pages, SEO, and automated GitHub Pages deploy to redpillbluepillstudios.com.
 
 | ID  | Feature                 | Description                              | Priority | Status |

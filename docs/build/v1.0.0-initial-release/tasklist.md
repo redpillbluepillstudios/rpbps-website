@@ -91,6 +91,6 @@ Ship to GitHub Pages and validate the maintainer workflow.
 |-----|------------------|-----------------------------------------|-------------|----------|--------|
 | 8.1 | CNAME | `public/CNAME` = `redpillbluepillstudios.com`. | 1.2 | 🟢 Completed | AGENT |
 | 8.2 | Deploy workflow | `.github/workflows/deploy.yml`: official Pages flow (checkout@v6 → withastro/action@v6 → deploy-pages@v5) on push to `main`. | 1.1 | 🟢 Completed | AGENT |
-| 8.3 | DNS + Pages settings | USER: set apex DNS (A/AAAA) + `www` CNAME, set Pages source = GitHub Actions, enforce HTTPS. | 8.1, 8.2 | 🔴 Not Started (USER) | USER |
-| 8.4 | Production verify | Confirm live site matches prototype; both games, carousel, privacy pages, SEO all correct on the domain. | 8.2, 8.3 | 🔴 Not Started (after deploy) | AGENT |
+| 8.3 | DNS + Pages settings | USER set apex A/AAAA + `www` CNAME (Namecheap), Pages source = GitHub Actions, DNS verified, HTTPS enforced. | 8.1, 8.2 | 🟢 Completed | USER |
+| 8.4 | Production verify | Live at https://redpillbluepillstudios.com (HTTP 200); both games + carousel render; `/privacy` and `/games/sagitta-chains/privacy` = 200; `www` → apex 301; HTTPS enforced. | 8.2, 8.3 | 🟢 Completed | AGENT |
 | 8.5 | Add-a-game verification | Verified end-to-end: a throwaway game folder appeared in the showcase with no code changes; no `privacy.md` → no privacy route; Steam platform button rendered from the lookup. | 4.5, 5.4 | 🟢 Completed | AGENT |

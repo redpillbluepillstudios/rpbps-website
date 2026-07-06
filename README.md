@@ -1,8 +1,7 @@
 # Red Pill Blue Pill Studios — Website
 
 ![version](https://img.shields.io/badge/version-1.0.0-ed1c24)
-![Astro](https://img.shields.io/badge/Astro-7.0.6-ed1c24)
-![license](https://img.shields.io/badge/license-proprietary-8b8f99)
+![owner](https://img.shields.io/badge/owner-RPBP%20Studios-8b8f99)
 
 The official website for **Red Pill Blue Pill Studios**, a one-person indie game studio — a data-driven [Astro](https://astro.build) site deployed to GitHub Pages at **[redpillbluepillstudios.com](https://redpillbluepillstudios.com)**.
 

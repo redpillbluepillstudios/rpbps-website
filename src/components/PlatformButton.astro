@@ -4,11 +4,11 @@ import { PLATFORMS, type PlatformKey } from '../lib/platforms';
 interface Props {
   platform: PlatformKey;
   url: string;
-  /** Game title, used to build an accessible label like "Sagitta Chains on the App Store". */
-  gameTitle: string;
+  /** App title, used to build an accessible label like "Sagitta Chains on the App Store". */
+  appTitle: string;
 }
 
-const { platform, url, gameTitle } = Astro.props;
+const { platform, url, appTitle } = Astro.props;
 const meta = PLATFORMS[platform];
 ---
 
@@ -17,7 +17,7 @@ const meta = PLATFORMS[platform];
   href={url}
   target="_blank"
   rel="noopener"
-  aria-label={`${gameTitle} ${meta.ariaSuffix}`}
+  aria-label={`${appTitle} ${meta.ariaSuffix}`}
 >
   <svg class="platform-btn__icon" viewBox={meta.viewBox} fill="currentColor" aria-hidden="true">
     <path d={meta.path} />

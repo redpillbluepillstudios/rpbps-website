@@ -4,15 +4,15 @@ import type { PlatformKey } from '../lib/platforms';
 
 interface Props {
   availableOn: { platform: PlatformKey; url: string }[];
-  gameTitle: string;
+  appTitle: string;
 }
 
-const { availableOn, gameTitle } = Astro.props;
+const { availableOn, appTitle } = Astro.props;
 ---
 
 <div class="platform-buttons">
   {availableOn.map((entry) => (
-    <PlatformButton platform={entry.platform} url={entry.url} gameTitle={gameTitle} />
+    <PlatformButton platform={entry.platform} url={entry.url} appTitle={appTitle} />
   ))}
 </div>
 

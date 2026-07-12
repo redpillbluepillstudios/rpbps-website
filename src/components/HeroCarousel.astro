@@ -1,18 +1,18 @@
 ---
 import { getImage } from 'astro:assets';
-import { getCarouselGames } from '../lib/carousel';
-import { getGameImage } from '../lib/gameImages';
-import GameArt from './GameArt.astro';
+import { getCarouselApps } from '../lib/carousel';
+import { getAppImage } from '../lib/appImages';
+import AppArt from './AppArt.astro';
 import PlatformButtons from './PlatformButtons.astro';
 
-const games = await getCarouselGames();
+const apps = await getCarouselApps();
 
 // Optimized, blurred-backdrop source per slide (the same art, used behind the copy).
 const slides = await Promise.all(
-  games.map(async (game) => {
-    const src = getGameImage(game.id, game.data.thumbnail);
+  apps.map(async (app) => {
+    const src = getAppImage(app.id, app.data.thumbnail);
     const bg = await getImage({ src, width: 1000, height: 1000, format: 'webp' });
-    return { game, bgSrc: bg.src };
+    return { app, bgSrc: bg.src };
   }),
 );
 
@@ -21,21 +21,21 @@ const hasMultiple = slides.length > 1;
 
 <header class="hero">
   <div class="hero-track" id="hero-track">
-    {slides.map(({ game, bgSrc }) => (
+    {slides.map(({ app, bgSrc }) => (
       <div class="hero-slide">
         <div class="hero-bg" style={`background-image:url('${bgSrc}')`}></div>
         <div class="hero-scrim"></div>
         <div class="hero-grid">
           <div class="hero-copy">
             <div class="eyebrow hero-eyebrow">Featured game</div>
-            <h1 class="hero-title">{game.data.title}</h1>
-            <p class="hero-blurb">{game.data.blurb}</p>
+            <h1 class="hero-title">{app.data.title}</h1>
+            <p class="hero-blurb">{app.data.blurb}</p>
             <div class="hero-cta">
-              <PlatformButtons availableOn={game.data.availableOn} gameTitle={game.data.title} />
+              <PlatformButtons availableOn={app.data.availableOn} appTitle={app.data.title} />
             </div>
           </div>
           <div class="hero-art">
-            <GameArt slug={game.id} title={game.data.title} thumbnail={game.data.thumbnail} size={640} loading="eager" />
+            <AppArt slug={app.id} title={app.data.title} thumbnail={app.data.thumbnail} size={640} loading="eager" />
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-/* Hero featured-game carousel: autoplay, prev/next, dots, pause-on-hover.
+/* Hero featured-app carousel: autoplay, prev/next, dots, pause-on-hover.
    Respects prefers-reduced-motion (no autoplay). Ported from the prototype. */
 
 const AUTOPLAY_MS = 6000;
@@ -24,7 +24,7 @@ function setupCarousel(): void {
       const d = document.createElement('button');
       d.type = 'button';
       d.className = 'hero-dot' + (idx === 0 ? ' active' : '');
-      d.setAttribute('aria-label', `Show game ${idx + 1}`);
+      d.setAttribute('aria-label', `Show slide ${idx + 1}`);
       d.addEventListener('click', () => {
         go(idx);
         restart();

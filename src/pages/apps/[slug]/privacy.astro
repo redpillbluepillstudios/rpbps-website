@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from 'astro:content';
+import PrivacyLayout from '../../../layouts/PrivacyLayout.astro';
+
+// A route exists for every app that has a privacy.md (the appPrivacy collection) —
+// games and non-game apps alike, all under /apps/<slug>/privacy. The app's display
+// title (when it has an app.md) is resolved here so a privacy-only stub with no
+// app.md doesn't trip a missing-entry warning.
+export async function getStaticPaths() {
+  const [policies, apps] = await Promise.all([
+    getCollection('appPrivacy'),
+    getCollection('apps'),
+  ]);
+  const titleBySlug = new Map(apps.map((a) => [a.id, a.data.title]));
+  return policies.map((policy) => ({
+    params: { slug: policy.id },
+    props: { policy, appTitle: titleBySlug.get(policy.id) },
+  }));
+}
+
+const { policy, appTitle } = Astro.props;
+
+// Display name for SEO: the app's own title when it has an app.md, else the
+// privacy stub's `product` field, else the slug. Never silently reuses page copy.
+const productName = appTitle ?? policy.data.product ?? policy.id;
+
+const { Content } = await render(policy);
+---
+
+<PrivacyLayout
+  title={policy.data.title}
+  updated={policy.data.updated}
+  seoTitle={`${policy.data.title} — Red Pill Blue Pill Studios`}
+  seoDescription={`Privacy policy for ${productName} by Red Pill Blue Pill Studios.`}
+>
+  <Content />
+</PrivacyLayout>

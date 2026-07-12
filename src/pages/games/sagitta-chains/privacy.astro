@@ -1,0 +1,23 @@
+---
+// Legacy redirect. Sagitta Chains' privacy policy used to live at
+// /games/sagitta-chains/privacy — a URL that is live in the App Store listing.
+// It now lives at /apps/sagitta-chains/privacy; this stub forwards the old URL
+// so the App Store link never 404s. Sagitta Chains is the only legacy game-privacy
+// URL that was ever published, so this is a single static file rather than a route.
+const target = '/apps/sagitta-chains/privacy';
+const canonical = new URL(target, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="noindex" />
+    <title>Redirecting…</title>
+  </head>
+  <body>
+    <p>This page has moved to <a href={target}>{canonical}</a>.</p>
+  </body>
+</html>

@@ -2,24 +2,24 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-/** Platforms a game can be available on. Add new ones here + in the PlatformButton lookup. */
+/** Platforms an app can be available on. Add new ones here + in the PlatformButton lookup. */
 const platform = z.enum(['web', 'apple-app-store', 'google-play', 'steam']);
 
-// Use the game's folder name as the entry id (slug), so a folder = a game.
+// Use the app's folder name as the entry id (slug), so a folder = an app.
 const slugFromDir = ({ entry }: { entry: string }) => entry.split('/')[0];
 
-const games = defineCollection({
-  loader: glob({ pattern: '**/game.md', base: './src/content/games', generateId: slugFromDir }),
+const apps = defineCollection({
+  loader: glob({ pattern: '**/app.md', base: './src/content/apps', generateId: slugFromDir }),
   schema: z.object({
     /** Display name. */
     title: z.string(),
     /** Small uppercase category label, e.g. "Game · Board". */
     tag: z.string(),
-    /** Short hero blurb. The longer games-section copy is the markdown body. */
+    /** Short hero blurb. The longer showcase copy is the markdown body. */
     blurb: z.string(),
-    /** Image filename inside src/assets/images/games/<slug>/ (1000×1000). */
+    /** Image filename inside src/assets/images/apps/<slug>/ (1000×1000). */
     thumbnail: z.string().default('thumbnail.png'),
-    /** Where the game can be played/bought — one button per entry. */
+    /** Where the app can be played/bought/used — one button per entry. */
     availableOn: z
       .array(z.object({ platform, url: z.url() }))
       .min(1),
@@ -34,12 +34,14 @@ const games = defineCollection({
   }),
 });
 
-// Per-game privacy policy. A game's privacy.md is what generates its /games/<slug>/privacy route.
-const gamePrivacy = defineCollection({
-  loader: glob({ pattern: '**/privacy.md', base: './src/content/games', generateId: slugFromDir }),
+// Per-app privacy policy. An app's privacy.md is what generates its /apps/<slug>/privacy route.
+const appPrivacy = defineCollection({
+  loader: glob({ pattern: '**/privacy.md', base: './src/content/apps', generateId: slugFromDir }),
   schema: z.object({
     title: z.string(),
     updated: z.coerce.date().optional(),
+    /** Display name of the app, used for SEO on privacy-only stubs that have no app.md yet. */
+    product: z.string().optional(),
   }),
 });
 
@@ -52,4 +54,4 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { games, gamePrivacy, pages };
+export const collections = { apps, appPrivacy, pages };

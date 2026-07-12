@@ -6,15 +6,18 @@ interface Props {
   updated?: Date;
   /** Route key for SEO (e.g. "/privacy"). */
   route?: string;
-  /** SEO overrides (game privacy pages pass these since they aren't in seo.json). */
+  /** SEO overrides (app privacy pages pass these since they aren't in seo.json). */
   seoTitle?: string;
   seoDescription?: string;
 }
 
 const { title, updated, route, seoTitle, seoDescription } = Astro.props;
 
+// Format in UTC: a date-only frontmatter value (e.g. 2026-07-11) is parsed as UTC
+// midnight, so formatting in the build machine's local timezone would roll it back
+// a day. timeZone: 'UTC' shows the exact date authored, in every environment.
 const updatedLabel = updated
-  ? updated.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  ? updated.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
   : undefined;
 ---
 

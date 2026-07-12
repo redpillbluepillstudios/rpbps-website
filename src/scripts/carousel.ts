@@ -71,6 +71,35 @@ function setupCarousel(): void {
     hero.addEventListener('mouseleave', restart);
   }
 
+  // Touch swipe (mobile): a mostly-horizontal drag past the threshold advances the
+  // carousel. Listeners are passive (no preventDefault) so vertical page scrolling
+  // is never blocked; we only act on touchend once the gesture's direction is known.
+  const SWIPE_THRESHOLD = 40;
+  let touchX = 0;
+  let touchY = 0;
+  const swipeTarget = hero ?? track;
+  swipeTarget.addEventListener(
+    'touchstart',
+    (e) => {
+      touchX = e.changedTouches[0].clientX;
+      touchY = e.changedTouches[0].clientY;
+    },
+    { passive: true },
+  );
+  swipeTarget.addEventListener(
+    'touchend',
+    (e) => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      const dy = e.changedTouches[0].clientY - touchY;
+      if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) next();
+        else prev();
+        restart();
+      }
+    },
+    { passive: true },
+  );
+
   restart();
 }
 

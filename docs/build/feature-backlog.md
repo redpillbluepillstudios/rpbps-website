@@ -30,9 +30,9 @@ _Delivered in passes within this same version. **Pass 1** (features 1–6): `app
 | 4 | Legacy privacy redirect | Redirect stub at the old `/games/<slug>/privacy` → new `/apps/<slug>/privacy` (meta-refresh + canonical) so the **live** Sagitta Chains App Store privacy link doesn't 404. | High | 🔴 Not Started |
 | 5 | TipTable Pro privacy stub | Stub `privacy.md` for TipTable Pro (slug `tiptable-pro`) at `/apps/tiptable-pro/privacy` with placeholder body for the owner to replace. | High | 🔴 Not Started |
 | 6 | Local verify (Pass 1) | `npm run dev` + `npm run build`/`preview`: confirm the home page renders identically and all privacy routes + the legacy redirect resolve. | Medium | 🔴 Not Started |
-| 7 | Utility category (Pass 2) | Introduce a formal category model so apps can be `Game`, `Utility`, etc.; TipTable Pro is the first `Utility`. | High | 🔴 Not Started |
-| 8 | Full TipTable Pro app (Pass 2) | TipTable Pro `app.md` (title, blurb, tag, `availableOn`) + thumbnail/assets — the full app entry, not just its privacy page. | High | 🔴 Not Started |
-| 9 | Utilities home-page section (Pass 2) | New home-page section presenting non-game apps (e.g. Utilities), alongside "The Games". | High | 🔴 Not Started |
+| 7 | Utility category (Pass 2) | Formal `category` field (`game`\|`utility`) on the apps schema; TipTable Pro is the first `Utility`. | High | 🟢 Built (deploy pending approval) |
+| 8 | Full TipTable Pro app (Pass 2) | TipTable Pro `app.md` (title, blurb, tag, thumbnail, App Store `availableOn`) + carousel slot #2. | High | 🟢 Built (deploy pending approval) |
+| 9 | Utilities home-page section (Pass 2) | New "Utilities" home section (blue icon) beside "Games"; category-aware carousel eyebrow; Utilities nav/footer links. | High | 🟢 Built (deploy pending approval) |
 
 ## Version 1.0.0 - 🟢 Completed
 The faithful Astro rebuild of the prototype: data-driven games showcase, carousel, studio + per-game privacy pages, SEO, and automated GitHub Pages deploy to redpillbluepillstudios.com.

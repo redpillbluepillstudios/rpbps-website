@@ -13,12 +13,16 @@ const apps = defineCollection({
   schema: z.object({
     /** Display name. */
     title: z.string(),
-    /** Small uppercase category label, e.g. "Game · Board". */
+    /** Product category — drives which home-page section the app appears in. */
+    category: z.enum(['game', 'utility']),
+    /** Small uppercase display label, e.g. "Game · Board" or "Utility · Tip Calculator". */
     tag: z.string(),
     /** Short hero blurb. The longer showcase copy is the markdown body. */
     blurb: z.string(),
     /** Image filename inside src/assets/images/apps/<slug>/ (1000×1000). */
     thumbnail: z.string().default('thumbnail.png'),
+    /** If set, the thumbnail links to this platform's URL (must be one of `availableOn`). */
+    thumbnailLink: platform.optional(),
     /** Where the app can be played/bought/used — one button per entry. */
     availableOn: z
       .array(z.object({ platform, url: z.url() }))
@@ -31,7 +35,13 @@ const apps = defineCollection({
         image: z.string().optional(),
       })
       .optional(),
-  }),
+  }).refine(
+    (data) => !data.thumbnailLink || data.availableOn.some((a) => a.platform === data.thumbnailLink),
+    {
+      message: 'thumbnailLink must reference a platform listed in availableOn.',
+      path: ['thumbnailLink'],
+    },
+  ),
 });
 
 // Per-app privacy policy. An app's privacy.md is what generates its /apps/<slug>/privacy route.

@@ -2,6 +2,7 @@
 import { getImage } from 'astro:assets';
 import { getCarouselApps } from '../lib/carousel';
 import { getAppImage } from '../lib/appImages';
+import { getThumbnailLink } from '../lib/apps';
 import AppArt from './AppArt.astro';
 import PlatformButtons from './PlatformButtons.astro';
 
@@ -12,7 +13,7 @@ const slides = await Promise.all(
   apps.map(async (app) => {
     const src = getAppImage(app.id, app.data.thumbnail);
     const bg = await getImage({ src, width: 1000, height: 1000, format: 'webp' });
-    return { app, bgSrc: bg.src };
+    return { app, bgSrc: bg.src, link: getThumbnailLink(app) };
   }),
 );
 
@@ -21,13 +22,12 @@ const hasMultiple = slides.length > 1;
 
 <header class="hero">
   <div class="hero-track" id="hero-track">
-    {slides.map(({ app, bgSrc }) => (
+    {slides.map(({ app, bgSrc, link }) => (
       <div class="hero-slide">
         <div class="hero-bg" style={`background-image:url('${bgSrc}')`}></div>
         <div class="hero-scrim"></div>
         <div class="hero-grid">
           <div class="hero-copy">
-            <div class="eyebrow hero-eyebrow">Featured game</div>
             <h1 class="hero-title">{app.data.title}</h1>
             <p class="hero-blurb">{app.data.blurb}</p>
             <div class="hero-cta">
@@ -35,7 +35,7 @@ const hasMultiple = slides.length > 1;
             </div>
           </div>
           <div class="hero-art">
-            <AppArt slug={app.id} title={app.data.title} thumbnail={app.data.thumbnail} size={640} loading="eager" />
+            <AppArt slug={app.id} title={app.data.title} thumbnail={app.data.thumbnail} size={640} loading="eager" href={link?.url} ariaLabel={link?.label} />
           </div>
         </div>
       </div>
@@ -102,10 +102,6 @@ const hasMultiple = slides.length > 1;
     align-items: center;
   }
 
-  .hero-eyebrow {
-    color: var(--red);
-    margin-bottom: 18px;
-  }
   .hero-title {
     margin: 0;
     font: 700 50px/1.12 var(--font-display);

@@ -1,5 +1,22 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import carousel from '../data/carousel.json';
+import { PLATFORMS } from './platforms';
+
+/**
+ * Resolve the link an app's thumbnail should point to, if any. `thumbnailLink`
+ * names a platform whose URL lives in `availableOn` (the schema guarantees it
+ * resolves). Returns undefined when the app opts out. DRY: used by the showcase
+ * card and the hero carousel so the linking rule lives in one place.
+ */
+export function getThumbnailLink(
+  app: CollectionEntry<'apps'>,
+): { url: string; label: string } | undefined {
+  const key = app.data.thumbnailLink;
+  if (!key) return undefined;
+  const entry = app.data.availableOn.find((a) => a.platform === key);
+  if (!entry) return undefined;
+  return { url: entry.url, label: `${app.data.title} ${PLATFORMS[key].ariaSuffix}` };
+}
 
 /**
  * All apps ordered for the showcase: carousel-listed apps first (in carousel

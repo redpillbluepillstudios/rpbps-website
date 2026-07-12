@@ -2,6 +2,7 @@
 import { render, type CollectionEntry } from 'astro:content';
 import AppArt from './AppArt.astro';
 import PlatformButtons from './PlatformButtons.astro';
+import { getThumbnailLink } from '../lib/apps';
 
 interface Props {
   app: CollectionEntry<'apps'>;
@@ -9,12 +10,13 @@ interface Props {
 
 const { app } = Astro.props;
 const { title, tag, thumbnail, availableOn } = app.data;
+const thumbLink = getThumbnailLink(app);
 const { Content } = await render(app);
 ---
 
 <article class="app rp-reveal">
   <div class="app__art-col">
-    <AppArt slug={app.id} title={title} thumbnail={thumbnail} size={600} />
+    <AppArt slug={app.id} title={title} thumbnail={thumbnail} size={600} href={thumbLink?.url} ariaLabel={thumbLink?.label} />
   </div>
   <div class="app__body">
     <h2 class="app__title">{title}</h2>
@@ -83,7 +85,7 @@ const { Content } = await render(app);
       gap: 32px;
       padding: 44px 0;
     }
-    .app__art-col { max-width: 260px; margin: 0 auto; }
+    .app__art-col { width: 100%; max-width: 260px; margin: 0 auto; }
     .app__title { font-size: 34px; }
   }
 </style>

@@ -37,13 +37,42 @@ This document outlines all the tasks to work on to deliver this particular versi
 | ID  | Task | Description | Dependencies | Status | Assigned To |
 |-----|------|-------------|--------------|--------|-------------|
 | 4.1 | Production build | `npm run build` clean (no missing-image/collection errors); restart dev daemon / clear `.astro` after the config change. | 1–3 | 🟢 Completed | AGENT |
-| 4.2 | Home-page visual parity | `dev`/`preview`: home renders identically — carousel, "The Games" showcase, images, platform buttons. Structurally verified in built HTML (all markers present); awaiting USER's visual confirm on the preview server. | 4.1 | 🟡 In Progress | AGENT |
+| 4.2 | Home-page visual parity | `dev`/`preview`: home rendered identically — carousel, showcase, images, platform buttons. Verified in built HTML + USER confirmed. | 4.1 | 🟢 Completed | AGENT |
 | 4.3 | Privacy routes + redirect | Confirm `/apps/sagitta-chains/privacy`, `/apps/tiptable-pro/privacy`, and studio `/privacy` render; old `/games/sagitta-chains/privacy` redirects to the new URL. | 4.1 | 🟢 Completed | AGENT |
-| 4.4 | Owner: commit & publish | USER commits, pushes (deploys), then updates the Sagitta Chains Privacy Policy URL in App Store Connect to `/apps/sagitta-chains/privacy`. | 4.1–4.3 | 🔴 Not Started | USER |
+| 4.4 | Owner: commit & publish | USER committed, pushed (deployed), privacy URL live; will update the Sagitta Chains Privacy Policy URL in App Store Connect to `/apps/sagitta-chains/privacy`. | 4.1–4.3 | 🟢 Completed | USER |
 
 ---
 
-_Phases 1–4 above are **Pass 1**. **Pass 2** (still part of v1.1.0 — Utility category, full TipTable Pro app, utilities home-page section; backlog features 7–9) will be appended as new phases here when we build it. The version stays **In Progress** until the full TipTable Pro app is live._
+# Pass 2 — Utility category, TipTable Pro app, Utilities home section
+
+## Phase 5 — Category model & content
+
+| ID  | Task | Description | Dependencies | Status | Assigned To |
+|-----|------|-------------|--------------|--------|-------------|
+| 5.1 | `category` field on apps schema | Add required `category: z.enum(['game','utility'])` to the `apps` collection in `content.config.ts`. | Pass 1 | 🟢 Completed | AGENT |
+| 5.2 | Tag existing games | Add `category: game` to `sagitta-chains/app.md` and `galactic-invaders/app.md`. | 5.1 | 🟢 Completed | AGENT |
+| 5.3 | TipTable Pro `app.md` | Create `src/content/apps/tiptable-pro/app.md`: `category: utility`, `tag: Utility · Calculator`, blurb/body (v1.6.0-free copy, no themes/presets, no em-dashes), thumbnail, App Store link `id1488483665`. | 5.1 | 🟢 Completed | AGENT |
+
+## Phase 6 — Home presentation
+
+| ID  | Task | Description | Dependencies | Status | Assigned To |
+|-----|------|-------------|--------------|--------|-------------|
+| 6.1 | Category-aware `AppsSection` | Filter by `category`; per-category filled icon + accent (game=red controller 34px, utility=blue wrench 30px); render nothing when a category is empty; collapse doubled border between stacked sections. | 5.1 | 🟢 Completed | AGENT |
+| 6.2 | Two home sections | `index.astro` renders Games then Utilities; heading "The Games" → "Games". | 6.1 | 🟢 Completed | AGENT |
+| 6.3 | Carousel + hero eyebrow | `carousel.json` → `["sagitta-chains","tiptable-pro"]` (Galactic leaves carousel, stays an app); hero eyebrow category-aware ("Featured game" / "Featured app"). | 5.3 | 🟢 Completed | AGENT |
+| 6.4 | Nav + Footer links | Add "Utilities" → `/#utilities` in `Nav.astro` and `Footer.astro`. | 6.2 | 🟢 Completed | AGENT |
+| 6.5 | Linkable thumbnails | Optional `thumbnailLink` field (a platform, build-validated to exist in `availableOn`); `getThumbnailLink()` helper; `AppArt` renders as a link (new-tab, aria-label, reduced-motion hover) in both showcase cards and hero. All three apps link their thumbnail to their store. | 6.1 | 🟢 Completed | AGENT |
+| 6.6 | Tagline update | Broaden the studio tagline to "A one-man indie game studio, sometimes building more than just games." in `Footer.astro` + `seo.json` (defaults + `/` description, latter now names all three products). | — | 🟢 Completed | AGENT |
+
+## Phase 7 — Verify & deploy
+
+| ID  | Task | Description | Dependencies | Status | Assigned To |
+|-----|------|-------------|--------------|--------|-------------|
+| 7.1 | Clean build + home verify | `.astro` cleared; `npm run build` green; built HTML confirms two sections, carousel order, eyebrows, tags, blue/red icons, App Store link, nav/footer links. | 5–6 | 🟢 Completed | AGENT |
+| 7.2 | USER visual check | USER runs `npm run dev` and confirms the Games/Utilities layout, icon sizes/colors, and TipTable card. | 7.1 | 🟡 In Progress | USER |
+| 7.3 | Deploy after approval | **Hold deploy until Apple approves the TipTable Pro update** (App Store button then points at the correctly-branded live listing), then commit + push. | 7.2 | 🔴 Not Started | USER |
+
+_Pass 2 is **built and verified locally**. The version stays **In Progress** until the TipTable Pro update is approved and the site is deployed (7.3)._
 
 **Close-out reminders (when the version is completed):**
 - Update `README.md` (project overview + version pill/badge) to reflect v1.1.0.

@@ -9,17 +9,27 @@ interface Props {
   /** Rendered size in px (square). Source is 1000×1000. */
   size?: number;
   loading?: 'lazy' | 'eager';
+  /** If set, the art becomes a link to this URL (opens in a new tab). */
+  href?: string;
+  /** Accessible label for the link (e.g. "TipTable Pro on the App Store"). */
+  ariaLabel?: string;
 }
 
-const { slug, title, thumbnail = 'thumbnail.png', size = 600, loading = 'lazy' } = Astro.props;
+const { slug, title, thumbnail = 'thumbnail.png', size = 600, loading = 'lazy', href, ariaLabel } = Astro.props;
 const art = getAppImage(slug, thumbnail);
 const initial = title.charAt(0);
+
+// Render as a link when href is provided, otherwise a plain div.
+const Tag = href ? 'a' : 'div';
+const linkProps = href
+  ? { href, target: '_blank', rel: 'noopener', 'aria-label': ariaLabel }
+  : {};
 ---
 
-<div class="app-art">
+<Tag class:list={['app-art', { 'app-art--link': href }]} {...linkProps}>
   <span class="app-art__fallback" aria-hidden="true">{initial}</span>
   <Image src={art} alt={`${title} cover art`} width={size} height={size} loading={loading} />
-</div>
+</Tag>
 
 <style>
   .app-art {
@@ -44,5 +54,27 @@ const initial = title.charAt(0);
   .app-art__fallback {
     font: 800 88px/1 var(--font-body);
     color: var(--red);
+  }
+
+  /* Linked art: subtle lift on hover/focus for affordance. */
+  .app-art--link {
+    display: flex;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .app-art--link :global(img) { transition: transform .3s ease; }
+  .app-art--link:hover,
+  .app-art--link:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 30px 70px -28px rgba(0, 0, 0, .85), inset 0 0 0 1px var(--line);
+    outline: none;
+  }
+  .app-art--link:hover :global(img) { transform: scale(1.04); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .app-art--link,
+    .app-art--link :global(img) { transition: none; }
+    .app-art--link:hover { transform: none; }
+    .app-art--link:hover :global(img) { transform: none; }
   }
 </style>

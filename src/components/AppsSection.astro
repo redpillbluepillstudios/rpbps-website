@@ -1,28 +1,58 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import { getOrderedApps } from '../lib/apps';
 import AppCard from './AppCard.astro';
 
-const apps = await getOrderedApps();
+interface Props {
+  /** Which apps this section shows. */
+  category: CollectionEntry<'apps'>['data']['category'];
+  /** Section heading (e.g. "Games", "Utilities"). */
+  heading: string;
+  /** Anchor id for nav/footer links (e.g. "games", "utilities"). */
+  anchorId: string;
+}
+
+const { category, heading, anchorId } = Astro.props;
+
+// Filled icons in the same style as the games controller, one per category.
+const ICONS: Record<Props['category'], string> = {
+  game: 'M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM11 13H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4-3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z',
+  utility: 'M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z',
+};
+// Brand accents: games in red, utilities in blue (the studio's red/blue identity).
+const ACCENTS: Record<Props['category'], string> = {
+  game: 'var(--red)',
+  utility: 'var(--blue)',
+};
+// Per-icon optical sizing: the controller sits smaller inside its viewBox than the
+// corner-to-corner wrench, so nudge it up to read as the same size.
+const ICON_SIZES: Record<Props['category'], number> = {
+  game: 34,
+  utility: 30,
+};
+
+const apps = (await getOrderedApps()).filter((app) => app.data.category === category);
 ---
 
-{/* id="games" + "The Games" heading are display/category labels — kept intentionally. */}
-<section id="games" class="apps-section">
-  <div class="apps-section__list">
-    <div class="sec-head rp-reveal apps-section__head">
-      <span class="sec-head__icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM11 13H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4-3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
-      </span>
-      <h2 class="sec-head__title">The Games</h2>
-    </div>
+{apps.length > 0 && (
+  <section id={anchorId} class="apps-section">
+    <div class="apps-section__list">
+      <div class="sec-head rp-reveal apps-section__head">
+        <span class="sec-head__icon" style={`color:${ACCENTS[category]}`} aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" style={`width:${ICON_SIZES[category]}px;height:${ICON_SIZES[category]}px`}><path d={ICONS[category]} /></svg>
+        </span>
+        <h2 class="sec-head__title">{heading}</h2>
+      </div>
 
-    {apps.map((app, idx) => (
-      <>
-        {idx > 0 && <hr class="apps-section__divider" />}
-        <AppCard app={app} />
-      </>
-    ))}
-  </div>
-</section>
+      {apps.map((app, idx) => (
+        <>
+          {idx > 0 && <hr class="apps-section__divider" />}
+          <AppCard app={app} />
+        </>
+      ))}
+    </div>
+  </section>
+)}
 
 <style>
   .apps-section {
@@ -33,6 +63,8 @@ const apps = await getOrderedApps();
     border-bottom: 1px solid var(--line);
     scroll-margin-top: 76px;
   }
+  /* Adjacent sections share a divider — don't double the border. */
+  .apps-section + .apps-section { border-top: none; }
   .apps-section__list {
     max-width: 1180px;
     margin: 0 auto;

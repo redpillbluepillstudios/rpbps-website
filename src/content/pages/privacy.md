@@ -1,11 +1,11 @@
 ---
 title: Privacy Policy
-updated: 2026-07-02
+updated: 2026-07-12
 ---
 
 **Effective July 2, 2026 by Red Pill, Blue Pill Studios, LLC**
 
-This policy explains how Red Pill Blue Pill Studios ("we," "us," "our") handles privacy on this website, **redpillbluepillstudios.com**. Our individual games each have their own privacy policy covering that game; this policy covers the website itself.
+This policy explains how Red Pill Blue Pill Studios ("we," "us," "our") handles privacy on this website, **redpillbluepillstudios.com**. Our individual apps each have their own privacy policy covering that app; this policy covers the website itself.
 
 ## The short version
 
@@ -27,9 +27,9 @@ Fonts used on this site are self-hosted — your browser loads them from this si
 
 We do not set cookies on this website.
 
-## Our games
+## Our apps
 
-Each game we publish has its own privacy policy describing how that game handles data. For example, see the [Sagitta Chains privacy policy](/games/sagitta-chains/privacy). Those policies apply to the games themselves and are separate from this website policy.
+Each app we publish has its own privacy policy describing how that app handles data. For example, see the [Sagitta Chains privacy policy](/apps/sagitta-chains/privacy). Those policies apply to the apps themselves and are separate from this website policy.
 
 ## Children's privacy
 

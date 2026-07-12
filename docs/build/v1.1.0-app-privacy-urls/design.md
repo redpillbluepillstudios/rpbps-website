@@ -75,6 +75,17 @@ _Share any other technical information that might be relevant to building this v
 - **Use `git mv`** for folder/file renames so history follows the move.
 - **Deploy is unchanged** — same static build + GitHub Pages Actions flow.
 
+## 4b. Pass 2 — Utility category, TipTable Pro app, Utilities home section (as built)
+
+- **Category model:** added a required `category: 'game' | 'utility'` field to the `apps` schema. `sagitta-chains` and `galactic-invaders` are `game`; `tiptable-pro` is `utility`. The free-text `tag` stays for display ("Game · Board", "Utility · Calculator") — `[Category] · [Type]`, where the second word is the genre/type (kept general, e.g. "Calculator", not "Tip Calculator").
+- **TipTable Pro `app.md`:** `category: utility`, App Store availability (`id1488483665`, the in-place replacement of the _Split & Tip Calc_ listing — same bundle ID). Copy reflects only what ships free in v1.6.0 — **no themes / no customizable presets** (hidden until the v1.7 IAP; advertising them risks App Review), rounding described as "on the result", **no em-dashes** (owner preference).
+- **Home = two sections from one component.** `AppsSection` is now category-aware: it takes `category` / `heading` / `anchorId`, filters apps to that category, renders nothing if empty, and picks a filled icon + accent per category — **games: red controller (34px); utilities: blue wrench (30px)** (the studio's red/blue identity; sizes optically matched). `index.astro` renders **Games** then **Utilities**. Heading changed from "The Games" to **"Games"** (matches the nav label). Stacked sections collapse the doubled 1px border.
+- **Carousel:** `carousel.json` = `["sagitta-chains", "tiptable-pro"]` — Galactic Invaders leaves the carousel (still an app in the Games section); TipTable Pro is slide #2. The hero eyebrow is now category-aware ("Featured game" for games, "Featured app" for utilities) so a utility slide reads correctly.
+- **Nav + Footer:** added a "Utilities" link (`/#utilities`) beside "Games".
+- **Linkable thumbnails:** an optional `thumbnailLink` field (a platform key, build-validated via a zod `.refine()` to exist in `availableOn`) makes an app's art a link to that store. `getThumbnailLink()` in `lib/apps.ts` resolves `{ url, label }` (DRY, shared by card + hero); `AppArt` renders as an `<a>` when linked (new tab, aria-label from the platform's `ariaSuffix`, subtle reduced-motion-safe hover). All three apps link their thumbnail to their store.
+- **Tagline broadened:** "A one-man indie game studio, sometimes building more than just games." replaces the games-only tagline in `Footer.astro` and `seo.json` (site default + `/` description, which now names all three products). No em-dashes; drops "easy to play" (may ship more involved apps later).
+- **Deploy timing:** Pass 2 is built and verified locally but **held from deploy until Apple approves the TipTable Pro update**, so the App Store button points at the correctly-branded live listing (until then the same App ID shows the old "Split & Tip Calc" name).
+
 ## 5. Open Questions
 _Unresolved technical or product questions affecting this version._
 

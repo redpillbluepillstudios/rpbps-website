@@ -1,16 +1,17 @@
 # Red Pill Blue Pill Studios — Website
 
-![version](https://img.shields.io/badge/version-1.0.0-ed1c24)
+![version](https://img.shields.io/badge/version-1.1.0-ed1c24)
 [![owner](https://img.shields.io/badge/owner-RPBP%20Studios-8b8f99)](https://www.redpillbluepillstudios.com)
 
-The official website for **Red Pill Blue Pill Studios**, a one-person indie game studio — a data-driven [Astro](https://astro.build) site deployed to GitHub Pages at **[redpillbluepillstudios.com](https://redpillbluepillstudios.com)**.
+The official website for **Red Pill Blue Pill Studios**, a one-person indie game studio that sometimes builds more than just games — a data-driven [Astro](https://astro.build) site deployed to GitHub Pages at **[redpillbluepillstudios.com](https://redpillbluepillstudios.com)**.
 
 ## What's here
 
-- **Games showcase** with a featured-game hero carousel — all data-driven, no hardcoding.
-- **Add a game = add a folder.** Each game is a content folder + an images folder; it appears automatically.
-- **Privacy pages**: a studio policy (`/privacy`) and optional per-game policies (`/games/<slug>/privacy`).
-- **Design system** codifying the studio look (dark game-portal theme, red accent, pixel display font).
+- **Unified "apps" model** — every product is an *app* with a `category` (`game` or `utility`); a game is just an app in the Game category. The home page shows a **Games** section and a **Utilities** section, plus a featured-app hero carousel. All data-driven, no hardcoding.
+- **Add an app = add a folder.** Each app is a content folder + an images folder; it appears automatically.
+- **Privacy pages**: a studio policy (`/privacy`) and optional per-app policies at `/apps/<slug>/privacy`.
+- **Mobile-first nav**: a hamburger menu on phones (pill-mark logo in the bar, full logo + links in the menu) and a touch-swipe carousel.
+- **Design system** codifying the studio look (dark game-portal theme, red + blue brand accents, pixel display font).
 
 ## Local development
 
@@ -20,7 +21,7 @@ Requires **Node.js 24.x** (LTS-line) and npm.
 npm install       # install dependencies
 npm run dev       # start the dev server with hot reload (http://localhost:4321)
 npm run build     # build the static site to dist/
-npm run preview   # preview the production build locally
+npm run preview   # preview the last production build locally
 ```
 
 ## Project structure
@@ -28,32 +29,32 @@ npm run preview   # preview the production build locally
 ```
 src/
   assets/images/        # optimized images, organized by subfolder
-    brand/              # logo SVG variants
-    games/<slug>/       # per-game art (1000×1000 thumbnail.png)
-  components/           # Nav, Footer, HeroCarousel, GameCard, PlatformButtons, …
+    brand/              # logo SVG variants (horizontal, mark, stacked, footer)
+    apps/<slug>/        # per-app art (1000×1000 thumbnail.png)
+  components/           # Nav, Footer, HeroCarousel, AppsSection, AppCard, AppArt, PlatformButtons, …
   content/
-    games/<slug>/       # game.md (+ optional privacy.md) — one folder per game
+    apps/<slug>/        # app.md (+ optional privacy.md) — one folder per app
     pages/              # standalone content pages (studio privacy)
-  content.config.ts     # content collections + zod validation
+  content.config.ts     # content collections (apps, appPrivacy, pages) + zod validation
   data/
-    carousel.json       # ordered game slugs shown in the hero carousel
+    carousel.json       # ordered app slugs shown in the hero carousel
     seo.json            # global + per-page SEO
   layouts/              # BaseLayout, PrivacyLayout
-  lib/                  # image resolver, carousel/games/seo/platforms helpers
-  pages/                # routes (/, /privacy, /games/[slug]/privacy)
-  scripts/              # small client-side islands (nav, reveals, carousel)
+  lib/                  # image resolver, carousel/apps/seo/platforms helpers
+  pages/                # routes (/, /privacy, /apps/[slug]/privacy)
+  scripts/              # small client-side islands (nav + mobile menu, reveals, carousel)
   styles/               # tokens.css (design tokens) + global.css
 public/                 # CNAME, favicon, OG image, static assets
 ```
 
-## Adding a game
+## Adding an app
 
-1. Create `src/content/games/<slug>/game.md` (title, tag, blurb, `availableOn`).
-2. Add `src/assets/images/games/<slug>/thumbnail.png` (1000×1000).
+1. Create `src/content/apps/<slug>/app.md` with `title`, `category` (`game` | `utility`), `tag`, `blurb`, and `availableOn`. Optionally set `thumbnailLink` to make the thumbnail link to one of its `availableOn` platforms.
+2. Add `src/assets/images/apps/<slug>/thumbnail.png` (1000×1000).
 3. To feature it in the hero carousel, add its `<slug>` to `src/data/carousel.json`.
-4. (Optional) Add `src/content/games/<slug>/privacy.md` to publish a privacy policy at `/games/<slug>/privacy`.
+4. (Optional) Add `src/content/apps/<slug>/privacy.md` to publish a privacy policy at `/apps/<slug>/privacy`.
 
-No code changes required.
+The app appears in the Games or Utilities section automatically based on its `category`. No code changes required.
 
 ## Deployment
 

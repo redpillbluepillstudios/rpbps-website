@@ -12,15 +12,28 @@ _How to use this file (for the **AGENT**):_
 - Render the page shell (`<head>`, nav, footer, SEO) once in a single `BaseLayout` that every page uses. **Why:** DRY — nav/footer/head exist in exactly one place and can't drift.
 - Ship zero client JS by default; add JS only for genuinely interactive islands (carousel, nav-on-scroll). **Why:** Astro's speed comes from static HTML — JS only where interactivity is real.
 - Define content collections in `src/content.config.ts` with the `glob()` loader and validate every entry with a zod schema. **Why:** build-time validation + type safety means malformed content fails the build instead of shipping broken.
+- Every product is an **app** in the `apps` collection (`src/content/apps/<slug>/app.md`) with a required `category` (`game` | `utility`); a game is a *category*, not a separate model. Home sections and future product types key off `category`. **Why:** one model scales to any product type without a parallel tree.
+- Unify all product privacy under `/apps/<slug>/privacy` — one `pages/apps/[slug]/privacy.astro` over the `appPrivacy` collection — and keep a small static redirect for any legacy URL that's live externally. **Why:** one privacy namespace; external links (e.g. App Store) never 404 when structure changes.
 
 ## Code & Style
 - Write pages/UI as `.astro` components with component-scoped `<style>`; keep all design tokens as CSS custom properties in one stylesheet (`src/styles/tokens.css`). **Why:** no repeated inline styles; re-theming is a one-file change.
 - Query content with `getCollection()` / `getEntry()`; render bodies via `render(entry)` → `<Content />`. **Why:** the current (Astro 5+/7) content API; avoids deprecated patterns.
 - Generate dynamic routes with `getStaticPaths()` keyed by the entry `id` (the folder slug). **Why:** static, predictable URLs derived directly from content.
-- Optimize raster images through Astro's `<Image>` / `src/assets` pipeline; put only unprocessed assets (fonts, favicon, `robots.txt`, `CNAME`) in `public/`. **Why:** automatic optimization for content images, untouched passthrough for the rest.
+- Optimize raster images through Astro's `<Image>` / `src/assets` pipeline; put only unprocessed assets (fonts, favicon, `robots.txt`, `CNAME`) in `public/`. **Why:** automatic optimization for content images, untouched passthrough for the rest. (Pipeline images get hashed `/_astro/…` URLs — for a *stable* shareable image URL, put that file in `public/`.)
+- Reference a platform's URL from `availableOn` rather than duplicating it (e.g. `thumbnailLink` names a platform, validated by a zod `.refine()` to exist in `availableOn`). **Why:** one source of truth; a typo fails the build instead of shipping a dead link.
+- Format content dates in UTC: `date.toLocaleDateString('en-US', { …, timeZone: 'UTC' })`. **Why:** a date-only frontmatter value (`2026-07-11`) parses as UTC midnight, so formatting in the build machine's local timezone renders it a day early.
+
+## Responsive & Mobile
+- One breakpoint for the home-layout flip: **820px** — nav, hero, cards, section, and footer all switch to mobile together. Finer refinements (hero arrows hidden <560, privacy title <600) are the deliberate exceptions. **Why:** independently-authored breakpoints created a half-mobile in-between zone.
+- A CSS grid item with `max-width` + `margin: 0 auto` also needs `width: 100%`, or it collapses to its content width. **Why:** shipped a mobile bug where card art shrank to the fallback letter until `width: 100%` was added.
+- Mobile nav = hamburger → full-screen menu: pill mark (`logo-mark.svg`) in the bar, full stacked logo + links in the menu; toggle logic in `nav.ts` (close on Escape / link-tap / resize-to-desktop, lock body scroll, set `aria-expanded`). **Why:** inline links overlap the logo on phones.
+
+## Content & Copy
+- Product store copy must match the app's App Store `listing.md`: describe only shipping (free-tier) features, never IAP-gated ones, and use **no em-dashes** (owner preference). **Why:** advertising inaccessible features risks App Review rejection; consistency with the live listing.
 
 ## Testing
 - Test locally with `npm run dev` (hot reload), then `npm run build` + `npm run preview` to exercise the real production build before deploying. **Why:** the static build can surface issues (asset paths, base URL) that dev does not.
+- Astro **inlines small client scripts** into the page HTML (no external `.js` emitted); verify client logic by grepping the built HTML, not `dist/_astro/*.js`. **Why:** wasted a verification pass looking for a JS bundle that didn't exist. (`preview` only serves the last `build` — content edits need a rebuild; `dev` hot-reloads.)
 
 ## Tooling & Dependencies
 - Pin exact latest-stable versions — no `next`/`rc`/`beta`/`alpha` tags, no stale majors — and commit the lockfile. **Why:** reproducible builds; "latest stable" is an explicit project requirement. (Current baseline: Astro 7.x, Node 24.x LTS-line, sharp 0.35.x.)

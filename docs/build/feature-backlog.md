@@ -17,22 +17,25 @@ This document lists features and enhancements derived from the plan. It is a liv
 | B2 | Individual game detail pages | Dedicated landing page per game (beyond the privacy child) with fuller content, screenshots, etc. Out of scope for v1 (games link out). | Agent |
 | B3 | Contact form | Optional replacement for the mailto link if a form is ever wanted. Dropped in v1 per prototype findings. | Agent |
 
-## Version 1.1.0 - 🟡 In Progress
+## Version 1.1.0 - 🟢 Completed
 Unify all product privacy policies under a single `/apps/<slug>/privacy` namespace and add the first non-game (Utility) app's privacy page. Migrates the existing game privacy to the new scheme, keeps the live App Store link working via a redirect, and lays the `apps` content foundation for the upcoming Utility category and home-page section. Studio `/privacy` is unchanged.
 
-_Delivered in passes within this same version. **Pass 1** (features 1–6): `apps` rename + privacy URL infrastructure + TipTable Pro privacy stub — commit & publish now so App Store Connect has a working privacy URL; version left **In Progress**. **Pass 2** (features 7–9, later): Utility category, full TipTable Pro app, and its home-page section. The version is **completed only once the full TipTable Pro app is live.**_
+_Delivered in three passes within this version, all built, verified, and shipped. **Pass 1** (1–6): `apps` rename + unified `/apps/<slug>/privacy` + Sagitta redirect. **Pass 2** (7–9): Utility category, full TipTable Pro app, Utilities home section, linkable thumbnails, broadened tagline. **Pass 3** (10–12): mobile hamburger menu + pill-logo, responsive polish (thumbnail fix, touch-swipe carousel, unified 820px breakpoint, mobile rule-hide), and copy/logo polish. The website work is complete — the TipTable Pro App Store button already targets the correct App ID, so Apple's pending approval only changes the displayed name (tracked in the app project, not here)._
 
 | ID  | Feature                      | Description                              | Priority | Status |
 |-----|------------------------------|------------------------------------------|----------|--------|
-| 1 | Unified `/apps/<slug>/privacy` route | One `src/pages/apps/[slug]/privacy.astro` renders privacy for both games and apps through the shared `PrivacyLayout`; build-time check that slugs are unique across all products. | High | 🔴 Not Started |
-| 2 | `appPrivacy` content collection | New collection at `src/content/apps/<slug>/privacy.md` mirroring `gamePrivacy`; the app folder later holds the full app content when the app is built. | High | 🔴 Not Started |
-| 3 | Migrate game privacy to `/apps` | Existing Sagitta Chains policy renders at `/apps/sagitta-chains/privacy` under the new scheme. | High | 🔴 Not Started |
-| 4 | Legacy privacy redirect | Redirect stub at the old `/games/<slug>/privacy` → new `/apps/<slug>/privacy` (meta-refresh + canonical) so the **live** Sagitta Chains App Store privacy link doesn't 404. | High | 🔴 Not Started |
-| 5 | TipTable Pro privacy stub | Stub `privacy.md` for TipTable Pro (slug `tiptable-pro`) at `/apps/tiptable-pro/privacy` with placeholder body for the owner to replace. | High | 🔴 Not Started |
-| 6 | Local verify (Pass 1) | `npm run dev` + `npm run build`/`preview`: confirm the home page renders identically and all privacy routes + the legacy redirect resolve. | Medium | 🔴 Not Started |
-| 7 | Utility category (Pass 2) | Formal `category` field (`game`\|`utility`) on the apps schema; TipTable Pro is the first `Utility`. | High | 🟢 Built (deploy pending approval) |
-| 8 | Full TipTable Pro app (Pass 2) | TipTable Pro `app.md` (title, blurb, tag, thumbnail, App Store `availableOn`) + carousel slot #2. | High | 🟢 Built (deploy pending approval) |
-| 9 | Utilities home-page section (Pass 2) | New "Utilities" home section (blue icon) beside "Games"; category-aware carousel eyebrow; Utilities nav/footer links. | High | 🟢 Built (deploy pending approval) |
+| 1 | Unified `/apps/<slug>/privacy` route | One `src/pages/apps/[slug]/privacy.astro` renders privacy for both games and apps through the shared `PrivacyLayout`; build-time check that slugs are unique across all products. | High | 🟢 Deployed |
+| 2 | `appPrivacy` content collection | New collection at `src/content/apps/<slug>/privacy.md` mirroring `gamePrivacy`; the app folder later holds the full app content when the app is built. | High | 🟢 Deployed |
+| 3 | Migrate game privacy to `/apps` | Existing Sagitta Chains policy renders at `/apps/sagitta-chains/privacy` under the new scheme. | High | 🟢 Deployed |
+| 4 | Legacy privacy redirect | Single static redirect `/games/sagitta-chains/privacy` → `/apps/sagitta-chains/privacy` (meta-refresh + canonical + noindex) so the **live** Sagitta Chains App Store privacy link doesn't 404. | High | 🟢 Deployed |
+| 5 | TipTable Pro privacy page | `privacy.md` for TipTable Pro at `/apps/tiptable-pro/privacy` (owner supplied the real policy). | High | 🟢 Deployed |
+| 6 | Local verify (Pass 1) | `npm run build`/`preview`: home renders identically and all privacy routes + the legacy redirect resolve. | Medium | 🟢 Deployed |
+| 7 | Utility category (Pass 2) | Formal `category` field (`game`\|`utility`) on the apps schema; TipTable Pro is the first `Utility`. | High | 🟢 Completed |
+| 8 | Full TipTable Pro app (Pass 2) | TipTable Pro `app.md` (title, blurb, tag, thumbnail, App Store `availableOn`) + carousel slot #2. | High | 🟢 Completed |
+| 9 | Utilities home-page section (Pass 2) | New "Utilities" home section (blue icon) beside "Games"; category-aware carousel eyebrow; Utilities nav/footer links; linkable thumbnails; broadened tagline. | High | 🟢 Completed |
+| 10 | Mobile navigation (Pass 3) | Hamburger menu: pill-only logo in the bar, full-color stacked logo + links in a full-screen menu (Escape / ✕ / link-tap / resize close, scroll lock). | High | 🟢 Completed |
+| 11 | Mobile & responsive polish (Pass 3) | Fix collapsed mobile card thumbnails; touch-swipe carousel; hide the card's red rule on mobile; unify every home breakpoint to 820px. | High | 🟢 Completed |
+| 12 | Copy & logo polish (Pass 3) | Galactic origin line; studio privacy broadened to "apps"; tagline → "one-person"; hero eyebrow removed; final TipTable copy; logo "Studios" spacing + brighter. | Medium | 🟢 Completed |
 
 ## Version 1.0.0 - 🟢 Completed
 The faithful Astro rebuild of the prototype: data-driven games showcase, carousel, studio + per-game privacy pages, SEO, and automated GitHub Pages deploy to redpillbluepillstudios.com.

@@ -86,6 +86,16 @@ _Share any other technical information that might be relevant to building this v
 - **Tagline broadened:** "A one-man indie game studio, sometimes building more than just games." replaces the games-only tagline in `Footer.astro` and `seo.json` (site default + `/` description, which now names all three products). No em-dashes; drops "easy to play" (may ship more involved apps later).
 - **Deploy timing:** Pass 2 is built and verified locally but **held from deploy until Apple approves the TipTable Pro update**, so the App Store button points at the correctly-branded live listing (until then the same App ID shows the old "Split & Tip Calc" name).
 
+## 4c. Pass 3 — mobile & polish (as built)
+
+- **Mobile navigation.** `Nav.astro` now carries three logo assets: the wordmark (`logo-horizontal.svg`) on desktop, the pill mark (`logo-mark.svg`) in the mobile bar, and the full-color stacked lockup (`logo.svg`) centered in a full-screen menu. A hamburger toggles the menu; `nav.ts` handles open/close via button / ✕ / Escape / link-tap / resize, sets `aria-expanded`, and locks body scroll while open. Links live in one array (bar + menu share them).
+- **Unified breakpoint.** Every home-layout component (nav, hero, cards, section, footer) flips to mobile at **820px** — previously staggered (hero/nav 820, cards/section 760, footer 720), which read as a two-stage collapse. Kept as finer refinements: hero arrows hidden <560, privacy title shrink <600.
+- **Mobile thumbnail fix.** `.app__art-col` had `margin: 0 auto` without a width, so as a grid item it collapsed to its content (the fallback letter). Added `width: 100%` (capped by `max-width: 260px`) so the card art fills correctly on phones.
+- **Touch-swipe carousel.** `carousel.ts` adds passive `touchstart`/`touchend` handlers: a mostly-horizontal drag past ~40px advances the carousel (no `preventDefault`, so vertical scrolling is never blocked). Arrows, dots, and autoplay are unchanged.
+- **Card rule on mobile.** The red `.app__rule` reads as a section divider when the card stacks, so it is `display: none` under the breakpoint (spacing preserved via `.app__available` margin).
+- **Logo edits** (`logo-horizontal.svg`): viewBox `96→103` and the "Studios" group shifted `translate(14 9)` for breathing room; the 105 Studios rects recolored `#8b909a → #c8ccd4` (brighter, still a subtitle).
+- **Copy/polish.** Galactic origin line; studio privacy broadened to "apps" + link fixed to `/apps/...` + date bumped; hero "Featured game/app" eyebrow removed (redundant); final TipTable body (shorter, no "Free" ahead of the v1.7 IAP, privacy as its own sentence); tagline "one-man → one-person".
+
 ## 5. Open Questions
 _Unresolved technical or product questions affecting this version._
 

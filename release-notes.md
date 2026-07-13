@@ -3,8 +3,15 @@
 This document lists new features, bug fixes and other changes implemented during a particular build (version or patch). Latest release is shown at the top.
 
 ## Table of Contents
+- [v1.1.1 — Pin Workflow Action SHAs (Patch) (2026-07-13)](#v111--pin-workflow-action-shas-patch---2026-07-13)
 - [Version 1.1.0 — apps model, TipTable Pro & mobile (2026-07-12)](#version-110--apps-model-tiptable-pro--mobile---2026-07-12)
 - [Version 1.0.0 — initial release (2026-07-02)](#version-100--initial-release---2026-07-02)
+
+---
+
+# v1.1.1 — Pin Workflow Action SHAs (Patch) - 2026-07-13
+- **Type:** Bug Fix (security hardening)
+- **Summary:** Pinned the three GitHub Actions in the deploy workflow (`actions/checkout`, `withastro/action`, `actions/deploy-pages`) to full commit SHAs instead of mutable version tags, closing a supply-chain risk flagged by a security review. Added `.github/dependabot.yml` (weekly) so the pins stay current via reviewable PRs. Behavior-preserving — the pinned SHAs match the tags they replaced.
 
 ---
 

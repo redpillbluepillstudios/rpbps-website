@@ -37,6 +37,7 @@ _How to use this file (for the **AGENT**):_
 
 ## Tooling & Dependencies
 - Pin exact latest-stable versions — no `next`/`rc`/`beta`/`alpha` tags, no stale majors — and commit the lockfile. **Why:** reproducible builds; "latest stable" is an explicit project requirement. (Current baseline: Astro 7.x, Node 24.x LTS-line, sharp 0.35.x.)
+- Pin every GitHub Actions `uses:` to a full 40-char commit SHA (with a `# vX.Y.Z` comment), never a mutable `@vN` tag, and add `.github/dependabot.yml` (`github-actions`, weekly) to bump the SHAs via reviewable PRs. **Why:** a tag can be re-pointed at malicious code that then runs in the deploy pipeline (which holds `pages: write` + `id-token: write`); a SHA is immutable, and Dependabot keeps the pin from going stale. Resolve the SHA from the tag's dereferenced commit (`git ls-remote <repo> 'refs/tags/vX^{}'`) — a plain `refs/tags/vX` on an annotated tag gives the tag-object SHA, not the commit.
 
 ## Workflow & Process
 - Build static (`output: 'static'`) and deploy to GitHub Pages via the official Actions flow (`actions/configure-pages` → `withastro/action` → `actions/upload-pages-artifact` → `actions/deploy-pages`) on push to `main`. **Why:** the supported, no-token path for Astro on Pages.

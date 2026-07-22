@@ -4,10 +4,6 @@ updated: 2026-07-17
 product: TipTable Pro
 ---
 
-**Effective July 17, 2026 by Red Pill, Blue Pill Studios, LLC**
-
-Have questions? [Contact us](mailto:marcelo@redpillbluepillstudios.com).
-
 ## The short version
 
 TipTable Pro does not collect your personal data. The app has no user accounts, no advertising, no third-party analytics, and no tracking. Your calculations happen entirely on your device, and the app does not send your bill amounts, calculations, or settings to us or to anyone else. The only thing it stores is your app settings. They stay on your device. If you have unlocked all features and keep iCloud Sync turned on, Apple also syncs those settings between your own devices through your personal iCloud account. We never see them either way.

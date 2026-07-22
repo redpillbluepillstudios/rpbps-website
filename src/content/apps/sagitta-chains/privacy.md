@@ -4,10 +4,6 @@ updated: 2026-07-22
 product: Sagitta Chains
 ---
 
-**Effective July 22, 2026 by Red Pill, Blue Pill Studios, LLC**
-
-Have questions? [Contact us](mailto:marcelo@redpillbluepillstudios.com).
-
 ## The short version
 
 Sagitta Chains does not collect your personal data. The game operates without user accounts, advertising, third-party analytics, or tracking mechanisms. Locally stored game data (scores, stats, settings, purchases, and device identifiers) remains on your device exclusively. One optional exception exists: enabling iCloud sync transmits your best scores through your personal Apple iCloud account, which the developers cannot access.

@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  # Validate every PR before it can reach main.
+  pull_request:
+    branches: [main]
+  # Allow manual runs from the Actions tab.
+  workflow_dispatch:
+
+# Read-only: this workflow validates, it never deploys.
+permissions:
+  contents: read
+
+# One run per branch; a new push supersedes an in-flight check.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Set up Node
+        # Node 22 matches the version withastro/action uses in deploy.yml.
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        # `npm ci` installs exactly what package-lock.json pins, and fails if
+        # the lockfile and package.json have drifted apart.
+        run: npm ci
+      - name: Type check
+        run: npm run check
+      - name: Build
+        run: npm run build

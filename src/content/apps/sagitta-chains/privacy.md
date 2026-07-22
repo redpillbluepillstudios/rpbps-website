@@ -1,9 +1,10 @@
 ---
 title: Privacy Policy for Sagitta Chains
-updated: 2026-07-01
+updated: 2026-07-22
+product: Sagitta Chains
 ---
 
-**Effective July 1, 2026 by Red Pill, Blue Pill Studios, LLC**
+**Effective July 22, 2026 by Red Pill, Blue Pill Studios, LLC**
 
 Have questions? [Contact us](mailto:marcelo@redpillbluepillstudios.com).
 
@@ -40,6 +41,12 @@ All purchases are processed by Apple. The developers never receive payment card 
 - No payment or financial information
 - No social, contacts, photos, microphone, or camera access
 
+## Checking for app updates
+
+Starting in v1.6.3, the app can check whether a newer version is available on the App Store and offer you an optional, dismissible prompt to update. You can ignore it; the app never blocks you from playing.
+
+That check is a single request to Apple's public App Store lookup service, at most once per day. **It sends only the app's own identifier** (`com.redpillbluepillstudios.sagittaChains`) so Apple's service knows which app to report on. It sends **no information about you or your device**, stores nothing about the request beyond the version number it received, and involves no third party. If the check fails for any reason, the app simply carries on without it.
+
 ## Crash and performance diagnostics
 
 The app includes no third-party crash-reporting tools. Apple may share aggregated, anonymized crash and performance diagnostics through App Store tools (Apple's "Share With App Developers" setting), controlled by your device settings and governed by Apple's privacy policy. These reports do not identify you.
@@ -58,6 +65,8 @@ Sagitta Chains does not collect personal information from anyone, including chil
 ## Changes to this policy
 
 Policy updates will reflect the new effective date at this URL. Material changes appear here before taking effect.
+
+**July 22, 2026.** Added the "Checking for app updates" section, describing the optional update notice introduced in version 1.6.3. Nothing about data collection changed: the app still collects no personal data, and the App Store privacy label remains **Data Not Collected**.
 
 ## Contact
 

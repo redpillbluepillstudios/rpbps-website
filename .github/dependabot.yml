@@ -1,4 +1,4 @@
-# Keeps the pinned GitHub Actions SHAs in deploy.yml current via reviewable PRs.
+# Keeps the pinned GitHub Actions SHAs in the workflows current via reviewable PRs.
 # Actions are pinned to full commit SHAs for supply-chain safety; Dependabot
 # opens a PR when a newer release is available so the pins don't go stale.
 version: 2

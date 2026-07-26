@@ -1,12 +1,12 @@
 ---
 title: Privacy Policy for TipTable Pro
-updated: 2026-07-17
+updated: 2026-07-25
 product: TipTable Pro
 ---
 
 ## The short version
 
-TipTable Pro does not collect your personal data. The app has no user accounts, no advertising, no third-party analytics, and no tracking. Your calculations happen entirely on your device, and the app does not send your bill amounts, calculations, or settings to us or to anyone else. The only thing it stores is your app settings. They stay on your device. If you have unlocked all features and keep iCloud Sync turned on, Apple also syncs those settings between your own devices through your personal iCloud account. We never see them either way.
+TipTable Pro does not collect your personal data. The app has no user accounts, no advertising, no third-party analytics, and no tracking. Your calculations happen entirely on your device, and the app does not send your bill amounts, calculations, or settings to us or to anyone else. The only thing it stores is your app settings. They stay on your device. If you have unlocked all features and keep iCloud Sync turned on, Apple also syncs those settings between your own devices through your personal iCloud account. We never see them either way. The app also asks Apple whether a newer version is available on the App Store, a request that contains only the app's own identifier and nothing about you.
 
 ## What the app stores
 
@@ -28,6 +28,16 @@ If you have purchased "Unlock All Features," the app can keep the settings liste
 - iCloud Sync is on by default for unlocked users and can be turned off anytime in Settings
 - **Delete my iCloud Data** (in the app's Settings) removes your settings from iCloud and stops syncing; the settings on your device are kept
 
+## Checking for updates
+
+TipTable Pro checks whether a newer version of the app is available on the App Store, so it can show you a small marker and a notice when one exists. To do this it asks Apple's public App Store lookup service (itunes.apple.com/lookup) about this app.
+
+- The request contains **only this app's own identifier**. It includes nothing about you, your device, your settings, or your calculations
+- No personal data is sent, received, or stored, and nothing reaches a server of ours (we operate none)
+- **The app does not download or install anything.** It reads a version number, and the notice simply links to our App Store page, where any update is installed by Apple in the usual way
+- The check runs quietly in the background. It never interrupts you, never blocks the app, and never shows you a network error
+- The result is held in memory for the current session only. Nothing is written to your device, and there is no history of these checks
+
 ## What we do **not** collect
 
 - No name, email, phone number, or contact information
@@ -40,7 +50,7 @@ If you have purchased "Unlock All Features," the app can keep the settings liste
 
 ## No accounts, and no data sent to us
 
-TipTable Pro is free to download. It does not create accounts, and it does not send your information to us (we operate no servers). Your calculations run entirely on your device. The only network activity the app can perform is the optional iCloud settings sync described above, which moves your settings between your own devices through your own iCloud account, handled entirely by Apple.
+TipTable Pro is free to download. It does not create accounts, and it does not send your information to us (we operate no servers). Your calculations run entirely on your device. The app performs only two kinds of network activity, both described above and both handled entirely by Apple: the optional iCloud settings sync, which moves your settings between your own devices through your own iCloud account, and the App Store update check, which sends only this app's own identifier. Neither one sends your information to us, and neither involves a server of ours.
 
 If you make an in-app purchase, it is processed by Apple through the App Store. That transaction is handled by Apple, not by us. We never receive or store your payment or financial information, and the app records only whether a feature has been unlocked, kept on your device.
 

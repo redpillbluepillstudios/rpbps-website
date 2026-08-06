@@ -1,12 +1,12 @@
 ---
 title: Privacy Policy for Sagitta Chains
-updated: 2026-07-22
+updated: 2026-08-06
 product: Sagitta Chains
 ---
 
 ## The short version
 
-Sagitta Chains does not collect your personal data. The game operates without user accounts, advertising, third-party analytics, or tracking mechanisms. Locally stored game data (scores, stats, settings, purchases, and device identifiers) remains on your device exclusively. One optional exception exists: enabling iCloud sync transmits your best scores through your personal Apple iCloud account, which the developers cannot access.
+Sagitta Chains does not collect your personal data. The game operates without user accounts, advertising, third-party analytics, or tracking mechanisms. Locally stored game data (scores, stats, settings, your Pro purchase, and device identifiers) remains on your device exclusively. One optional exception exists: enabling iCloud sync transmits your best scores through your personal Apple iCloud account, which the developers cannot access.
 
 ## What the app stores (on your device only)
 
@@ -15,7 +15,7 @@ Sagitta Chains stores the following locally using standard device storage:
 - Your best scores and highest level reached
 - Lifetime play statistics (levels cleared, longest chain)
 - Your settings (sound, haptics, theme, and similar preferences)
-- Which supporter purchase you own, if any, for badge and theme unlocking
+- Whether you own Pro
 - A randomly generated device-only identifier for organizing local records
 
 This information never leaves your device, and the developers cannot view it. Deleting the app removes this data, or you can clear it via the in-app Settings' Reset Progress option.
@@ -26,7 +26,7 @@ Enabling iCloud sync shares your best scores (high score, highest level, longest
 
 ## In-app purchases
 
-All purchases are processed by Apple. The developers never receive payment card or billing information. The app only records which tier you own, stored on your device and linked to your Apple ID for purchase restoration. No personal or financial data is collected through purchases.
+All purchases are processed by Apple. The developers never receive payment card or billing information. The app only records **whether you own Pro**, stored on your device and linked to your Apple ID so it can be restored on your devices. No personal or financial data is collected through purchases.
 
 ## What we do **not** collect
 
@@ -42,6 +42,14 @@ All purchases are processed by Apple. The developers never receive payment card 
 Starting in version 1.6.3, the app checks whether a newer version is available on the App Store. If there is one, a small marker appears on the Settings button and a note appears inside Settings. There are no popups and nothing to dismiss, and the app never blocks you from playing.
 
 That check is a single request to Apple's public App Store lookup service, made when you open the app. **It sends only the app's own identifier** (`com.redpillbluepillstudios.sagittaChains`) so Apple's service knows which app to report on. It sends **no information about you or your device**, stores nothing about the request beyond the version number it received, and involves no third party. If the check fails for any reason, the app simply carries on without it.
+
+## Rating and reviewing the app
+
+Starting in version 1.7.0, the app can open the App Store so you can leave a review. It appears in two places: a "Rate this game" row on the Pro screen, and an occasional prompt on the home screen after you have played a number of games.
+
+Tapping it simply **opens the App Store app** at this app's review page. Nothing is sent anywhere, and the app is never told what you do next: **Apple does not report back whether you wrote a review or what rating you gave**, so the app cannot know and nothing in the game depends on it. Reviews are never rewarded — Apple's guidelines prohibit that, and it would be impossible here in any case.
+
+The only thing stored is a local count of games played since the prompt last appeared, so it does not ask again too soon, plus a flag once you have tapped through so it never asks again. Both stay on your device and are erased by **Reset Progress**.
 
 ## Crash and performance diagnostics
 
@@ -61,6 +69,8 @@ Sagitta Chains does not collect personal information from anyone, including chil
 ## Changes to this policy
 
 Policy updates will show a new date at this URL. Material changes appear here before taking effect.
+
+**August 6, 2026.** Reworded the purchase sections for **Pro**, which replaces the previous Supporter and Supporter+ tiers, and added the "Rating and reviewing the app" section describing the new review prompt introduced in version 1.7.0. **Nothing about data collection changed:** the app still collects no personal data, opening the App Store sends nothing, and the App Store privacy label remains **Data Not Collected**.
 
 **July 22, 2026.** Added the "Checking for app updates" section, describing the optional update notice introduced in version 1.6.3. Nothing about data collection changed: the app still collects no personal data, and the App Store privacy label remains **Data Not Collected**.
 

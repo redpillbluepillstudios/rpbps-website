@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Red Pill Blue Pill Studios" shape-rendering="crispEdges">
+  <rect width="1024" height="1024" fill="#28282c"/>
+  <!-- Pixel pill -->
+  <g>
+    <rect x="278" y="304" width="208" height="52" fill="#d23a33"/>
+    <rect x="174" y="356" width="312" height="52" fill="#d23a33"/>
+    <rect x="122" y="408" width="364" height="52" fill="#d23a33"/>
+    <rect x="122" y="460" width="364" height="52" fill="#d23a33"/>
+    <rect x="122" y="512" width="364" height="52" fill="#d23a33"/>
+    <rect x="122" y="564" width="364" height="52" fill="#d23a33"/>
+    <rect x="174" y="616" width="312" height="52" fill="#d23a33"/>
+    <rect x="278" y="668" width="208" height="52" fill="#d23a33"/>
+    <rect x="486" y="304" width="260" height="52" fill="#2f5ed8"/>
+    <rect x="486" y="356" width="364" height="52" fill="#2f5ed8"/>
+    <rect x="486" y="408" width="416" height="52" fill="#2f5ed8"/>
+    <rect x="486" y="460" width="416" height="52" fill="#2f5ed8"/>
+    <rect x="486" y="512" width="416" height="52" fill="#2f5ed8"/>
+    <rect x="486" y="564" width="416" height="52" fill="#2f5ed8"/>
+    <rect x="486" y="616" width="364" height="52" fill="#2f5ed8"/>
+    <rect x="486" y="668" width="260" height="52" fill="#2f5ed8"/>
+  </g>
+</svg>

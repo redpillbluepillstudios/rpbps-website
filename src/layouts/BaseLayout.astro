@@ -5,6 +5,7 @@ import '@fontsource-variable/pixelify-sans/index.css';
 import '../styles/global.css';
 
 import Seo from '../components/Seo.astro';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import type { SeoOverrides } from '../lib/seo';
@@ -32,6 +33,7 @@ const { route = Astro.url.pathname, type = 'website', navOverlay = false, ...seo
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <Seo route={route} type={type} {...seoOverrides} />
+    {import.meta.env.PROD && <GoogleAnalytics />}
   </head>
   <body>
     <Nav overlay={navOverlay} />
